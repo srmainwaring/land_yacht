@@ -88,8 +88,8 @@
             </geometry>
             <material>
             <script>
-                <uri>file://media/materials/scripts/gazebo.material</uri>
-                <name>Gazebo/Gray</name>
+                <uri>model://land_yacht/materials/scripts/sand.material</uri>
+                <name>LandYacht/BeachSand</name>
             </script>
             </material>
         </visual>
