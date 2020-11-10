@@ -56,6 +56,7 @@
       <surface_model>EARTH_WGS84</surface_model>
     </spherical_coordinates>
 
+    <!-- A ground plane with a sand texture -->
     <model name="beach">
         <static>true</static>
         <link name="link">

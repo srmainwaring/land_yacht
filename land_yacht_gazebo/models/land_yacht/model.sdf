@@ -30,7 +30,7 @@
         <fluid_density>1.2</fluid_density>
         <forward>1 0 0</forward>
         <upward>0 1 0</upward>
-        <cp>-0.15 0.0 0.5</cp>
+        <cp>-0.15 0.0 0.75</cp>
         <link_name>main_sail_link</link_name>
         <radial_symmetry>true</radial_symmetry>
         <topic>lift_drag</topic>
@@ -514,6 +514,20 @@
                 </script>
             </material>
         </visual>
+
+        <!-- Debug - Centre of Pressure for main sail (see main_sail_liftdrag) -->
+        <visual name="cp_main_sail_visual">
+            <pose>-0.15 0.0 0.75 0 0 0</pose>
+            <geometry>
+                <sphere><radius>0.01</radius></sphere>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Red</name>
+                </script>
+            </material>
+        </visual>
+
         <collision name="main_sail_collision">
             <geometry>
                 <mesh>
@@ -523,14 +537,14 @@
         </collision>
 
         <inertial>
-            <pose>0 0 0 0 0 0</pose>
+            <pose>-0.15 0.0 0.75 1.570796 1.570796 0</pose>
             <mass>0.5</mass>
             <inertia>
-                <ixx>0.16</ixx>
+                <ixx>0.006667708</ixx>
                 <ixy>0</ixy>
-                <iyy>0.16</iyy>
+                <iyy>0.060001042</iyy>
                 <iyz>0</iyz>
-                <izz>0.16</izz>
+                <izz>0.066666667</izz>
             </inertia>
         </inertial>
 
@@ -555,7 +569,76 @@
         <sensor name="force_torque_sensor" type="force_torque">
             <always_on>true</always_on>
             <update_rate>30</update_rate>
-            <visualize>true</visualize>
+            <visualize>false</visualize>
+        </sensor>
+    </joint>
+
+    <link name="thruster_link">
+        <pose>0.565 0 0.22 0 -1.570796 0</pose>
+        <visual name="motor_visual">
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/motor_t3543-05.stl</uri>
+                </mesh>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Gray</name>
+                </script>
+            </material>
+        </visual>
+        <visual name="propeller_visual">
+            <pose>0 0 0.05 3.141592654 0 0</pose>
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/propeller_9x4.7.stl</uri>
+                </mesh>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Gray</name>
+                </script>
+            </material>
+        </visual>
+
+        <collision name="thruster_collision">
+            <pose>0 0 0.0205 0 0 0</pose>
+            <geometry>
+                <cylinder>
+                    <radius>0.0175</radius>
+                    <length>0.041</length>
+                </cylinder>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <pose>0 0 0.0205 0 0 0</pose>
+            <mass>0.129</mass>
+            <inertia>
+                <ixx>2.79473E-05</ixx>
+                <ixy>0</ixy>
+                <iyy>2.79473E-05</iyy>
+                <iyz>0</iyz>
+                <izz>1.97531E-05</izz>
+            </inertia>
+        </inertial>
+    </link>
+
+    <joint type="revolute" name="thruster_joint">
+        <child>thruster_link</child>
+        <parent>base_link</parent>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <initial_position>0</initial_position>
+            <dynamics>
+                <damping>0.001</damping>
+                <!-- <friction>0.01</friction> -->
+            </dynamics>
+        </axis>
+        <sensor name="force_torque_sensor" type="force_torque">
+            <always_on>true</always_on>
+            <update_rate>30</update_rate>
+            <visualize>false</visualize>
         </sensor>
     </joint>
 
