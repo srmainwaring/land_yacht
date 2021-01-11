@@ -20,7 +20,7 @@
     <pose>0 0 0.075 0 0 0</pose>
     <static>false</static>
 
-    <plugin name="main_sail_liftdrag" filename="libSailPlugin.so">
+    <!-- <plugin name="main_sail_liftdrag" filename="libSailPlugin.so">
         <a0>0.0</a0>
         <cla>6.2832</cla>
         <alpha_stall>0.1592</alpha_stall>
@@ -34,10 +34,10 @@
         <link_name>main_sail_link</link_name>
         <radial_symmetry>true</radial_symmetry>
         <topic>lift_drag</topic>
-    </plugin>
+    </plugin> -->
 
     <!--  Using values from iris_with_standoffs_demo -->
-    <plugin name="prop_blade_1_liftdrag" filename="libLiftDragPlugin.so">
+    <!-- <plugin name="prop_blade_1_liftdrag" filename="libLiftDragPlugin.so">
         <a0>0.3</a0>
         <alpha_stall>1.4</alpha_stall>
         <cla>4.2500</cla>
@@ -68,8 +68,43 @@
         <forward>0 -1 0</forward>
         <upward>0 0 1</upward>
         <link_name>thruster_link</link_name>
+    </plugin> -->
+
+    <!-- Linear approximations to lift / drag coefficient curves for NACA 0018 airfoil
+        Foil stalls at approx. 14 degrees (lower in the linear approx.)
+    
+    -->
+    <plugin name="wing_sail_liftdrag" filename="libSailPlugin.so">
+        <a0>0.0</a0>
+        <cla>6.2832</cla>
+        <alpha_stall>0.1592</alpha_stall>
+        <cla_stall>-0.7083</cla_stall>
+        <cda>0.63662</cda>
+        <area>0.4858</area>
+        <fluid_density>1.2</fluid_density>
+        <forward>1 0 0</forward>
+        <upward>0 1 0</upward>
+        <cp>-0.05 0.0 0.65</cp>
+        <link_name>wing_sail_link</link_name>
+        <radial_symmetry>true</radial_symmetry>
+        <topic>lift_drag</topic>
     </plugin>
 
+    <plugin name="wing_sail_elevator_liftdrag" filename="libSailPlugin.so">
+        <a0>0.0</a0>
+        <cla>6.2832</cla>
+        <alpha_stall>0.1592</alpha_stall>
+        <cla_stall>-0.7083</cla_stall>
+        <cda>0.63662</cda>
+        <area>0.04858</area>
+        <fluid_density>1.2</fluid_density>
+        <forward>1 0 0</forward>
+        <upward>0 1 0</upward>
+        <cp>-0.015 0.0 0.2</cp>
+        <link_name>wing_sail_elevator_link</link_name>
+        <radial_symmetry>true</radial_symmetry>
+        <topic>lift_drag</topic>
+    </plugin>
 
     <plugin name="ardupilot_plugin" filename="libArduPilotPlugin.so">
         <!-- MAVLink / port settings -->
@@ -111,8 +146,8 @@
             <multiplier>-1.570796</multiplier>
             <offset>-0.5</offset>
             <type>POSITION</type>
-            <p_gain>10</p_gain>
-            <i_gain>0.01</i_gain>
+            <p_gain>20</p_gain>
+            <i_gain>0.5</i_gain>
             <d_gain>0</d_gain>
             <i_max>100</i_max>
             <i_min>-100</i_min>
@@ -127,7 +162,7 @@
             input command in [0, 1]
             multiplier = 800 (sets max rpm)
         -->
-        <control channel="2">
+        <!-- <control channel="2">
             <jointName>thruster_joint</jointName>
             <useForce>1</useForce>
             <multiplier>-800</multiplier>
@@ -140,25 +175,53 @@
             <i_min>-1</i_min>
             <cmd_max>2.5</cmd_max>
             <cmd_min>-2.5</cmd_min>
-        </control>
+        </control> -->
 
         <!-- SERVO4_FUNCTION 89 (MainSail)
             SERVO4_MIN 1000
             SERVO4_MAX 2000
 
             input command in [0, 1]
-            desired sail angle in [0, 80] deg
-
-            if the sails are allowed to sheet out too far 
-            the boat will not gybe.
+            desired sail angle in [5, 50] deg
         -->
-        <control channel="3">
+        <!-- <control channel="3">
             <jointName>main_sail_joint</jointName>
             <useForce>1</useForce>
             <multiplier>1.39626</multiplier>
             <offset>0</offset>
             <type>POSITION_LIMIT</type>
             <p_gain>40</p_gain>
+            <i_gain>0.1</i_gain>
+            <d_gain>0</d_gain>
+            <i_max>100</i_max>
+            <i_min>-100</i_min>
+            <cmd_max>1000</cmd_max>
+            <cmd_min>-1000</cmd_min>
+        </control> -->
+
+
+        <!-- SERVO4_FUNCTION 128 (WingSailElevator)
+            SERVO4_MIN 1000
+            SERVO4_MAX 2000
+            SERVO4_TRIM 1000
+
+            SAIL_ANGLE_MIN 0
+            SAIL_ANGLE_MAX 10
+
+            DEFLECTION_MAX_DEG 10
+
+            input command in [0, 1]
+            offset = -0.5
+            multiplier radians(2 * DEFLECTION_MAX_DEG) = 0.34906585
+            desired wingsail elevator in [-10, 10] deg
+        -->
+        <control channel="3">
+            <jointName>wing_sail_elevator_joint</jointName>
+            <useForce>1</useForce>
+            <multiplier>0.34906585</multiplier>
+            <offset>-0.5</offset>
+            <type>POSITION</type>
+            <p_gain>20</p_gain>
             <i_gain>0.1</i_gain>
             <d_gain>0</d_gain>
             <i_max>100</i_max>
@@ -544,7 +607,7 @@
     </joint>
 
     <!-- Main sail-->
-    <link name="main_sail_link">
+    <!-- <link name="main_sail_link">
         <pose>0.5 0 0.04 0 -0.20943951 0</pose>
         <visual name="main_rig_visual">
             <geometry>
@@ -572,7 +635,6 @@
             </material>
         </visual>
 
-        <!-- Debug - Centre of Pressure for main sail (see main_sail_liftdrag) -->
         <visual name="cp_main_sail_visual">
             <pose>-0.15 0.0 0.75 0 0 0</pose>
             <geometry>
@@ -616,7 +678,7 @@
             <initial_position>0</initial_position>
             <dynamics>
                 <damping>0.001</damping>
-                <!-- <friction>0.01</friction> -->
+                <friction>0.0</friction>
             </dynamics>
             <limit>
                 <lower>-1.396263402</lower>
@@ -628,9 +690,9 @@
             <update_rate>30</update_rate>
             <visualize>false</visualize>
         </sensor>
-    </joint>
+    </joint> -->
 
-    <link name="thruster_link">
+    <!-- <link name="thruster_link">
         <pose>0.565 0 0.22 0 -1.570796 0</pose>
         <visual name="motor_visual">
             <geometry>
@@ -658,7 +720,6 @@
             </material>
         </visual>
 
-        <!-- Debug - Centre of Pressure for propeller blades (see prop_blade_1_liftdrag) -->
         <visual name="cp_prop_blade_1_visual">
             <pose>0.084 0 0.041 0 0 0</pose>
             <geometry>
@@ -713,7 +774,7 @@
             <initial_position>0</initial_position>
             <dynamics>
                 <damping>0.001</damping>
-                <!-- <friction>0.01</friction> -->
+                <friction>0.0</friction>
             </dynamics>
         </axis>
         <sensor name="force_torque_sensor" type="force_torque">
@@ -721,6 +782,194 @@
             <update_rate>30</update_rate>
             <visualize>false</visualize>
         </sensor>
+    </joint> -->
+
+    <!-- Wing sail -->
+    <link name="wing_sail_link">
+        <pose>0.5 0 0.05 0 0 0</pose>
+        <visual name="wing_sail_visual">
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+                </mesh>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/GreyTransparent</name>
+                </script>
+            </material>
+        </visual>
+
+        <visual name="wing_sail_elevator_spar_visual">
+            <pose>-0.25 0 0.65 0 1.570796 0</pose>
+            <geometry>
+                <cylinder>
+                    <radius>0.007</radius>
+                    <length>1.000</length>
+                </cylinder>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Grey</name>
+                </script>
+            </material>
+        </visual>
+
+        <visual name="cp_wing_sail_visual">
+            <pose>-0.05 0 0.65 0 0 0</pose>
+            <geometry>
+                <sphere><radius>0.01</radius></sphere>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Red</name>
+                </script>
+            </material>
+        </visual>
+
+        <collision name="wing_sail_collision">
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+                </mesh>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <pose>-0.05 0.0 0.65 1.570796 1.570796 0</pose>
+            <mass>2.0</mass>
+            <inertia>
+                <ixx>0.021666667</ixx>
+                <ixy>0</ixy>
+                <iyy>0.326733333</iyy>
+                <iyz>0</iyz>
+                <izz>0.348266667</izz>
+            </inertia>
+        </inertial>
+    </link>
+
+    <joint type="revolute" name="wing_sail_joint">
+        <child>wing_sail_link</child>
+        <parent>base_link</parent>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <initial_position>0</initial_position>
+            <dynamics>
+                <damping>0.1</damping>
+            </dynamics>
+        </axis>
+        <sensor name="force_torque_sensor" type="force_torque">
+            <always_on>true</always_on>
+            <update_rate>30</update_rate>
+            <visualize>true</visualize>
+        </sensor>
+    </joint>
+
+    <!-- Wing sail elevator -->
+    <link name="wing_sail_elevator_link">
+        <pose>0 0 0.55 0 0 0</pose>
+        <visual name="wing_sail_elevator_visual">
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
+                </mesh>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/GreyTransparent</name>
+                </script>
+            </material>
+        </visual>
+
+        <visual name="cp_wing_sail_elevator_visual">
+            <pose>-0.015 0 0.2 0 0 0</pose>
+            <geometry>
+                <sphere><radius>0.01</radius></sphere>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Red</name>
+                </script>
+            </material>
+        </visual>
+
+        <collision name="wing_sail_elevator_collision">
+            <geometry>
+                <mesh>
+                    <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
+                </mesh>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <pose>-0.015 0.0 0.2 1.570796 1.570796 0</pose>
+            <mass>0.0632455</mass>
+            <inertia>
+                <ixx>6.75281E-05</ixx>
+                <ixy>0</ixy>
+                <iyy>0.001029888</iyy>
+                <iyz>0</iyz>
+                <izz>0.001096957</izz>
+            </inertia>
+        </inertial>
+    </link>
+
+    <joint type="revolute" name="wing_sail_elevator_joint">
+        <child>wing_sail_elevator_link</child>
+        <parent>wing_sail_link</parent>
+        <axis>
+            <xyz>0 0 1</xyz>
+            <initial_position>0</initial_position>
+            <dynamics>
+                <damping>0.01</damping>
+            </dynamics>
+        </axis>
+        <sensor name="force_torque_sensor" type="force_torque">
+            <always_on>true</always_on>
+            <update_rate>30</update_rate>
+            <visualize>true</visualize>
+        </sensor>
+    </joint>
+
+    <!-- Wing sail counterweight -->
+    <link name="wing_sail_counterweight_link">
+        <pose>0.65 0 0.70 0 0 0</pose>
+        <visual name="wing_sail_counterweight_visual">
+            <geometry>
+                <sphere>
+                    <radius>0.025</radius>
+                </sphere>
+            </geometry>
+            <material>
+                <script>
+                    <name>Gazebo/Yellow</name>
+                </script>
+            </material>
+        </visual>
+
+        <collision name="wing_sail_elevator_collision">
+            <geometry>
+                <sphere>
+                    <radius>0.025</radius>
+                </sphere>
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass>0.1</mass>
+            <inertia>
+                <ixx>0.000025</ixx>
+                <ixy>0</ixy>
+                <iyy>0.000025</iyy>
+                <iyz>0</iyz>
+                <izz>0.00025</izz>
+            </inertia>
+        </inertial>
+    </link>
+
+    <joint type="fixed" name="wing_sail_counterweight_joint">
+        <child>wing_sail_counterweight_link</child>
+        <parent>wing_sail_link</parent>
     </joint>
 
 </model>
