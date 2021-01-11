@@ -41,6 +41,32 @@
         <topic>lift_drag</topic>
     </plugin>
 
+    <!-- Gazebo / ROS plugins -->
+    <!-- <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+        <robotNamespace>/</robotNamespace>
+        <jointName>
+            wing_sail_joint
+        </jointName>
+        <updateRate>50</updateRate>
+        <alwaysOn>true</alwaysOn>
+    </plugin> -->
+    <!-- ground truth -->
+    <plugin name="gazebo_ros_f3d" filename="libgazebo_ros_f3d.so">
+        <robotNamespace>/</robotNamespace>
+        <bodyName>wing_sail_link</bodyName>
+        <topicName>/gazebo/f3d/wing_sail_link</topicName>
+        <frameName>world</frameName>
+        <updateRate>50</updateRate>
+    </plugin>
+    <!-- force torque sensor -->
+    <plugin name="gazebo_ros_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+        <robotNamespace>/</robotNamespace>
+        <jointName>wing_sail_joint</jointName>
+        <topicName>/gazebo/ft_sensor/wing_sail_joint</topicName>
+        <gaussianNoise>0</gaussianNoise>
+        <updateRate>50</updateRate>
+    </plugin>
+
     <!-- ArduPilot plugin
         
         RC 4 Control (<control channel="3">)
