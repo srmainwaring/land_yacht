@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>land_yacht_gazebo_plugins</name>
+    <version>0.0.0</version>
+    <description>The land_yacht_gazebo_plugins package</description>
+    <maintainer email="rhys.mainwaring@me.com">Rhys Mainwaring</maintainer>
+    <license>GPLv3</license>
+    <author email="rhys.mainwaring@me.com">Rhys Mainwaring</author>
+    <buildtool_depend>catkin</buildtool_depend>
+    <export>
+        <gazebo_ros plugin_path="${prefix}/lib"/>
+    </export>
+</package>
