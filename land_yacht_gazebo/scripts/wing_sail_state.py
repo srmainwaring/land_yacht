@@ -91,10 +91,11 @@ class WingSailStateNode(object):
         # transform from the joint's child link frame to world frame
         force_world = do_transform_vector(tf_rot, tf_pos, force_body)
 
-        print("tf_pos [m]:      {}".format(np.round(tf_pos, 4)))
-        print("tf_rot [deg]:    {}".format(np.round(np.degrees(tf_rot.as_euler("xyz")), 2)))
-        print("force_body [N]:  {}".format(np.round(force_body, 4)))
-        print("force_world [N]: {}".format(np.round(force_world, 4)))
+        print("tf_pos [m]:           {}".format(np.round(tf_pos, 4)))
+        print("tf_rot [deg]:         {}".format(np.round(np.degrees(tf_rot.as_euler("xyz")), 2)))
+        print("force_body [N]:       {}".format(np.round(force_body, 4)))
+        print("force_world [N]:      {}".format(np.round(force_world, 4)))
+        print("force_world_norm [N]: {}".format(np.linalg.norm(force_world)))
         print()
         
         # rotate base link about z
