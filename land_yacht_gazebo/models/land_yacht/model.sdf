@@ -795,7 +795,7 @@
             </geometry>
             <material>
                 <script>
-                    <name>Gazebo/GreyTransparent</name>
+                    <name>Gazebo/Orange</name>
                 </script>
             </material>
         </visual>
@@ -876,7 +876,7 @@
             </geometry>
             <material>
                 <script>
-                    <name>Gazebo/GreyTransparent</name>
+                    <name>Gazebo/Orange</name>
                 </script>
             </material>
         </visual>
