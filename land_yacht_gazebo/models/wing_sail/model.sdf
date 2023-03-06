@@ -20,8 +20,9 @@
     <pose>0 0 0.05 0 0 0</pose>
     <static>false</static>
 
-    <!-- Sail plugin -->
-    <!-- <plugin name="wing_sail_liftdrag" filename="libSailPlugin.so">
+    <!-- Plugins -->
+    <plugin name="gz::sim::systems::SailLiftDrag"
+        filename="asv_sim-sail_lift_drag-system">
         <a0>0.0</a0>
         <cla>6.2832</cla>
         <alpha_stall>0.1592</alpha_stall>
@@ -35,40 +36,7 @@
         <link_name>wing_sail_link</link_name>
         <radial_symmetry>true</radial_symmetry>
         <topic>lift_drag</topic>
-    </plugin> -->
-
-    <!-- Gazebo / ROS plugins -->
-
-    <!-- ground truth -->
-    <!-- <plugin name="gazebo_ros_f3d" filename="libgazebo_ros_f3d.so">
-        <robotNamespace>/</robotNamespace>
-        <bodyName>wing_sail_link</bodyName>
-        <topicName>/gazebo/f3d/wing_sail_link</topicName>
-        <frameName>world</frameName>
-        <updateRate>50</updateRate>
-    </plugin> -->
-
-    <!-- force torque sensor -->
-    <!-- <plugin name="gazebo_ros_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
-        <robotNamespace>/</robotNamespace>
-        <jointName>wing_sail_joint</jointName>
-        <topicName>/gazebo/ft_sensor/wing_sail_joint</topicName>
-        <gaussianNoise>0</gaussianNoise>
-        <updateRate>50</updateRate>
-    </plugin> -->
-
-    <!-- Fix base to the world [optional]
-
-        This is disabled in favour of a high mass base_link as fixing
-        the model to the world results in jitters.
-
-        See Also: http://gazebosim.org/tutorials/?tut=ros_urdf#RigidlyFixingAModeltotheWorld
-    -->
-    <!-- <link name="world" />
-    <joint type="fixed" name="base_link_joint">
-        <parent>world</parent>
-        <child>base_link</child>
-    </joint> -->
+    </plugin>
 
     <!-- Base -->
     <link name="base_link">
