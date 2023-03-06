@@ -20,8 +20,9 @@
     <pose>0 0 0.05 0 0 0</pose>
     <static>false</static>
 
-    <!-- Sail plugin -->
-    <!-- <plugin name="wing_sail_liftdrag" filename="libSailPlugin.so">
+    <!-- Plugins -->
+    <plugin name="gz::sim::systems::SailLiftDrag"
+        filename="asv_sim2-sail-lift-drag-system">
         <a0>0.0</a0>
         <cla>6.2832</cla>
         <alpha_stall>0.1592</alpha_stall>
@@ -35,36 +36,7 @@
         <link_name>wing_sail_link</link_name>
         <radial_symmetry>true</radial_symmetry>
         <topic>lift_drag</topic>
-    </plugin> -->
-
-    <!-- Gazebo / ROS plugins -->
-
-    <!-- joint states -->
-    <!-- <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-        <robotNamespace>/</robotNamespace>
-        <jointName>
-            wing_sail_joint
-        </jointName>
-        <updateRate>50</updateRate>
-    </plugin> -->
-
-    <!-- ground truth -->
-    <!-- <plugin name="gazebo_ros_f3d" filename="libgazebo_ros_f3d.so">
-        <robotNamespace>/</robotNamespace>
-        <bodyName>wing_sail_link</bodyName>
-        <topicName>/gazebo/f3d/wing_sail_link</topicName>
-        <frameName>world</frameName>
-        <updateRate>50</updateRate>
-    </plugin> -->
-
-    <!-- force torque sensor -->
-    <!-- <plugin name="gazebo_ros_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
-        <robotNamespace>/</robotNamespace>
-        <jointName>wing_sail_joint</jointName>
-        <topicName>/gazebo/ft_sensor/wing_sail_joint</topicName>
-        <gaussianNoise>0</gaussianNoise>
-        <updateRate>50</updateRate>
-    </plugin> -->
+    </plugin>
 
     <!-- Base -->
     <link name="base_link">
@@ -187,7 +159,7 @@
           <upper>1.0E16</upper>
         </limit>
         <dynamics>
-          <damping>0.01</damping>
+          <damping>0.1</damping>
         </dynamics>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
