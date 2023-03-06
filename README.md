@@ -1,4 +1,4 @@
 # Land Yacht
 
-A simple land yacht model for Gazebo and ArduPilot
+A land yacht model for Gazebo and ArduPilot
 
