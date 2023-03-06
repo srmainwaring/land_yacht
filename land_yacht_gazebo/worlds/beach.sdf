@@ -94,9 +94,9 @@
       </link>
     </model>
 
-    <!-- <include>
+    <include>
       <uri>model://land_yacht</uri>
-    </include> -->
+    </include>
 
   </world>
 </sdf>
