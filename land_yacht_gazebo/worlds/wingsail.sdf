@@ -47,8 +47,59 @@
     </light>
 
     <wind>
-      <linear_velocity>-5.0 5.0 0.0</linear_velocity>
+      <linear_velocity>5.0 5.0 0.0</linear_velocity>
     </wind>
+
+    <model name="axes">
+      <static>1</static>
+      <link name="link">
+        <visual name="r">
+          <cast_shadows>0</cast_shadows>
+          <pose>5 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>10 0.01 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+            <emissive>1 0 0 1</emissive>
+            <specular>0.5 0.5 0.5 1</specular>
+          </material>
+        </visual>
+        <visual name="g">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 5 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 10 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 1 0 1</ambient>
+            <diffuse>0 1 0 1</diffuse>
+            <emissive>0 1 0 1</emissive>
+            <specular>0.5 0.5 0.5 1</specular>
+          </material>
+        </visual>
+        <visual name="b">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 0 5.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.01 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+            <emissive>0 0 1 1</emissive>
+            <specular>0.5 0.5 0.5 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
 
     <model name="ground_plane">
       <static>true</static>
@@ -83,7 +134,7 @@
     </include>
 
     <include>
-        <pose>0 1.0 0.02 0 0 0</pose>
+        <pose>1 -1 0.02 0 0 0</pose>
         <uri>model://wing_sail_with_elevator</uri>
     </include>
 
