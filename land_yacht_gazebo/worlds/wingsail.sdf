@@ -82,5 +82,11 @@
         <uri>model://wing_sail</uri>
     </include>
 
+    <include>
+        <pose>0 1.0 0.02 0 0 0</pose>
+        <uri>model://wing_sail_with_elevator</uri>
+    </include>
+
+
   </world>
 </sdf>

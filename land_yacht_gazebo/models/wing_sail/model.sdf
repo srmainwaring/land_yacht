@@ -72,7 +72,7 @@
 
     <!-- Base -->
     <link name="base_link">
-      <visual name="base">
+      <visual name="visual">
         <geometry>
           <box>
             <size>0.5 0.5 0.1</size>
@@ -84,7 +84,7 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-      <collision name="base">
+      <collision name="collision">
         <geometry>
           <box>
             <size>0.5 0.5 0.1</size>
@@ -181,7 +181,7 @@
     </link>
 
     <joint name="wing_sail_joint" type="revolute" >
-      <pose> 0.5 0 0 0 0 0</pose>
+      <pose> 0 0 0 0 0 0</pose>
       <child>wing_sail_link</child>
       <parent>base_link</parent>
       <axis>
@@ -190,6 +190,9 @@
           <lower>0</lower>
           <upper>0</upper>
         </limit>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
         <always_on>true</always_on>
