@@ -39,7 +39,6 @@
     <!-- Main sail-->
     <link name="main_sail_link">
       <!-- <pose>0.5 0 0.04 0 -0.20943951 0</pose> -->
-      <!-- <pose>0 0 0 0 -0.20943951 0</pose> -->
       <inertial>
         <pose>-0.15 0.0 0.75 1.570796 1.570796 0</pose>
         <mass>0.5</mass>
