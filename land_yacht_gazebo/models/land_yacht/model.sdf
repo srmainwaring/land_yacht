@@ -17,63 +17,6 @@
 -->
 <sdf version="1.6">
   <model name="land_yacht">
-    <!-- Plugins -->
-    <!-- <plugin filename="gz-sim-joint-state-publisher-system"
-      name="gz::sim::systems::JointStatePublisher">
-    </plugin> -->
-
-    <!-- <plugin name="gz::sim::systems::SailLiftDrag"
-        filename="asv_sim2-sail-lift-drag-system">
-      <a0>0.0</a0>
-      <cla>6.2832</cla>
-      <alpha_stall>0.1592</alpha_stall>
-      <cla_stall>-0.7083</cla_stall>
-      <cda>0.63662</cda>
-      <area>0.4858</area>
-      <fluid_density>1.2</fluid_density>
-      <forward>1 0 0</forward>
-      <upward>0 1 0</upward>
-      <cp>-0.15 0.0 0.75</cp>
-      <link_name>main_sail_link</link_name>
-      <radial_symmetry>true</radial_symmetry>
-      <topic>lift_drag</topic>
-    </plugin> -->
-
-    <!--  Using values from iris_with_standoffs_demo -->
-    <!-- <plugin filename="gz-sim-lift-drag-system"
-        name="gz::sim::systems::LiftDrag">
-      <a0>0.3</a0>
-      <alpha_stall>1.4</alpha_stall>
-      <cla>4.2500</cla>
-      <cda>0.10</cda>
-      <cma>0.00</cma>
-      <cla_stall>-0.025</cla_stall>
-      <cda_stall>0.0</cda_stall>
-      <cma_stall>0.0</cma_stall>
-      <area>0.002</area>
-      <air_density>1.2041</air_density>
-      <cp>0.084 0 0</cp>
-      <forward>0 1 0</forward>
-      <upward>0 0 1</upward>
-      <link_name>thruster_link</link_name>
-    </plugin>
-    <plugin filename="gz-sim-lift-drag-system"
-        name="gz::sim::systems::LiftDrag">
-      <a0>0.3</a0>
-      <alpha_stall>1.4</alpha_stall>
-      <cla>4.2500</cla>
-      <cda>0.10</cda>
-      <cma>0.00</cma>
-      <cla_stall>-0.025</cla_stall>
-      <cda_stall>0.0</cda_stall>
-      <cma_stall>0.0</cma_stall>
-      <area>0.002</area>
-      <air_density>1.2041</air_density>
-      <cp>-0.084 0 0</cp>
-      <forward>0 -1 0</forward>
-      <upward>0 0 1</upward>
-      <link_name>thruster_link</link_name>
-    </plugin> -->
 
     <!-- Base -->
     <link name="base_link">
@@ -153,6 +96,13 @@
         </material>
       </visual>
 
+      <sensor name="imu_sensor" type="imu">
+        <pose>0.05 0 0.06 3.141593 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>1000</update_rate>
+        <visualize>1</visualize>
+      </sensor>
+
       <!-- <sensor name="camera" type="camera">
         <always_on>1</always_on>
         <update_rate>30</update_rate>
@@ -171,19 +121,13 @@
         <pose>0.5 0 0.3 0 0 0</pose>
       </sensor> -->
 
-      <sensor name="imu_sensor" type="imu">
-        <pose>0.05 0 0.06 3.141593 0 0</pose>
-        <always_on>1</always_on>
-        <update_rate>1000</update_rate>
-        <visualize>1</visualize>
-      </sensor>
-
       <!-- <sensor name="anemometer_sensor" type="anemometer">
         <pose>0 0 0 0 0 0</pose>
         <always_on>true</always_on>
         <update_rate>50</update_rate>
         <topic>anemometer</topic>
       </sensor>
+
       <visual name="anemometer_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -414,77 +358,43 @@
       </axis>
     </joint>
 
-    <!-- Main sail-->
-    <!-- <link name="main_sail_link">
-      <pose>0.5 0 0.04 0 -0.20943951 0</pose>
-      <visual name="main_rig_visual">
-        <geometry>
-          <mesh>
-            <uri>model://land_yacht/meshes/land_yacht_rig.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <ambient>0.5 0.5 0.5 1.0</ambient>
-          <diffuse>0.5 0.5 0.5 1.0</diffuse>
-          <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
-      </visual>
-      <visual name="main_sail_visual">
-        <pose>-0.01 0 0.12 0 0.20943951 0</pose>
-        <geometry>
-          <mesh>
-            <uri>model://land_yacht/meshes/land_yacht_flat_sail.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <ambient>0.5 0.5 0.5 0.9</ambient>
-          <diffuse>0.5 0.5 0.5 0.9</diffuse>
-          <specular>0.1 0.1 0.1 0.9</specular>
-        </material>
-      </visual>
+    <!-- Wing sail -->
+    <include>
+      <pose>0.5 0 0.1 0 0 0</pose>
+      <uri>model://wing_sail_with_elevator</uri>
+      <name>wing_sail</name>
+    </include>
 
-      <visual name="cp_main_sail_visual">
-        <pose>-0.15 0.0 0.75 0 0 0</pose>
-        <geometry>
-          <sphere>
-            <radius>0.01</radius>
-          </sphere>
-        </geometry>
-        <material>
-          <ambient>1.0 0.0 0.0 1.0</ambient>
-          <diffuse>1.0 0.0 0.0 1.0</diffuse>
-          <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
-      </visual>
-
-      <collision name="main_sail_collision">
-        <geometry>
-          <mesh>
-            <uri>model://land_yacht/meshes/land_yacht_rig.stl</uri>
-          </mesh>
-        </geometry>
-      </collision>
-
-      <inertial>
-        <pose>-0.15 0.0 0.75 1.570796 1.570796 0</pose>
-        <mass>0.5</mass>
-        <inertia>
-          <ixx>0.006667708</ixx>
-          <ixy>0</ixy>
-          <iyy>0.060001042</iyy>
-          <iyz>0</iyz>
-          <izz>0.066666667</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint type="revolute" name="main_sail_joint">
-      <child>main_sail_link</child>
+    <joint type="revolute" name="wing_sail_joint">
+      <child>wing_sail::wing_sail_link</child>
       <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
         <dynamics>
-          <damping>0.001</damping>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+      <sensor name="force_torque_sensor" type="force_torque">
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+    </joint>
+
+    <!-- Main sail -->
+    <!-- <include>
+      <pose>0.5 0 0.04 0 -0.20943951 0</pose>
+      <uri>model://land_yacht_main_sail</uri>
+      <name>main_sail</name>
+    </include>
+
+    <joint type="revolute" name="main_sail_joint">
+      <child>main_sail::main_sail_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0.1</damping>
         </dynamics>
         <limit>
           <lower>-1.396263402</lower>
@@ -498,6 +408,7 @@
       </sensor>
     </joint> -->
 
+    <!-- Thruster -->
     <!-- <link name="thruster_link">
       <pose>0.565 0 0.22 0 -1.570796 0</pose>
       <visual name="motor_visual">
@@ -525,7 +436,6 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-
       <visual name="cp_prop_blade_1_visual">
         <pose>0.084 0 0.041 0 0 0</pose>
         <geometry>
@@ -552,7 +462,6 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-
       <collision name="thruster_collision">
         <pose>0 0 0.0205 0 0 0</pose>
         <geometry>
@@ -562,7 +471,6 @@
           </cylinder>
         </geometry>
       </collision>
-
       <inertial>
         <pose>0 0 0.0205 0 0 0</pose>
         <mass>0.129</mass>
@@ -590,29 +498,43 @@
         <update_rate>30</update_rate>
         <visualize>false</visualize>
       </sensor>
-    </joint> -->
-
-    <include>
-        <pose>0.5 0 0.1 0 0 0</pose>
-        <uri>model://wing_sail_with_elevator</uri>
-        <name>wing_sail</name>
-    </include>
-
-    <joint type="revolute" name="wing_sail_joint">
-      <child>wing_sail::wing_sail_link</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <dynamics>
-          <damping>0.1</damping>
-        </dynamics>
-      </axis>
-      <sensor name="force_torque_sensor" type="force_torque">
-        <always_on>true</always_on>
-        <update_rate>30</update_rate>
-        <visualize>true</visualize>
-      </sensor>
     </joint>
+
+    <plugin filename="gz-sim-lift-drag-system"
+        name="gz::sim::systems::LiftDrag">
+      <a0>0.3</a0>
+      <alpha_stall>1.4</alpha_stall>
+      <cla>4.2500</cla>
+      <cda>0.10</cda>
+      <cma>0.00</cma>
+      <cla_stall>-0.025</cla_stall>
+      <cda_stall>0.0</cda_stall>
+      <cma_stall>0.0</cma_stall>
+      <area>0.002</area>
+      <air_density>1.2041</air_density>
+      <cp>0.084 0 0</cp>
+      <forward>0 1 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>thruster_link</link_name>
+    </plugin>
+
+    <plugin filename="gz-sim-lift-drag-system"
+        name="gz::sim::systems::LiftDrag">
+      <a0>0.3</a0>
+      <alpha_stall>1.4</alpha_stall>
+      <cla>4.2500</cla>
+      <cda>0.10</cda>
+      <cma>0.00</cma>
+      <cla_stall>-0.025</cla_stall>
+      <cda_stall>0.0</cda_stall>
+      <cma_stall>0.0</cma_stall>
+      <area>0.002</area>
+      <air_density>1.2041</air_density>
+      <cp>-0.084 0 0</cp>
+      <forward>0 -1 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>thruster_link</link_name>
+    </plugin> -->
 
   </model>
 </sdf>

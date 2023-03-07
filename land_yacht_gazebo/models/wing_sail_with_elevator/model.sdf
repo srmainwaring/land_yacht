@@ -77,14 +77,14 @@
       <collision name="wing_sail_collision">
         <geometry>
           <mesh>
-            <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+            <uri>model://wing_sail_with_elevator/meshes/wing_sail.stl</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="wing_sail_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+            <uri>model://wing_sail_with_elevator/meshes/wing_sail.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -139,14 +139,14 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
+            <uri>model://wing_sail_with_elevator/meshes/wing_sail_elevator.stl</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="wing_sail_elevator_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
+            <uri>model://wing_sail_with_elevator/meshes/wing_sail_elevator.stl</uri>
           </mesh>
         </geometry>
         <material>
