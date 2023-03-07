@@ -17,89 +17,68 @@
 -->
 <sdf version="1.6">
   <model name="wing_sail_with_elevator">
-    <pose>0 0 0.05 0 0 0</pose>
-    <static>false</static>
 
     <!-- Plugins -->
+
+    <!--
+      Linear approximations to lift / drag coefficient curves for
+      NACA 0018 airfoil.
+      Foil stalls at approx. 14 degrees (lower in the linear approx.)
+    -->
     <plugin name="gz::sim::systems::SailLiftDrag"
         filename="asv_sim2-sail-lift-drag-system">
-        <a0>0.0</a0>
-        <cla>6.2832</cla>
-        <alpha_stall>0.1592</alpha_stall>
-        <cla_stall>-0.7083</cla_stall>
-        <cda>0.63662</cda>
-        <area>0.4858</area>
-        <fluid_density>1.2</fluid_density>
-        <forward>1 0 0</forward>
-        <upward>0 1 0</upward>
-        <cp>-0.05 0.0 0.65</cp>
-        <link_name>wing_sail_link</link_name>
-        <radial_symmetry>true</radial_symmetry>
-        <topic>lift_drag</topic>
+      <a0>0.0</a0>
+      <cla>6.2832</cla>
+      <alpha_stall>0.1592</alpha_stall>
+      <cla_stall>-0.7083</cla_stall>
+      <cda>0.63662</cda>
+      <area>0.4858</area>
+      <fluid_density>1.2</fluid_density>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <cp>-0.05 0.0 0.65</cp>
+      <link_name>wing_sail_link</link_name>
+      <radial_symmetry>true</radial_symmetry>
+      <topic>lift_drag</topic>
     </plugin>
 
-    <!-- Base -->
-    <link name="base_link">
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>0.5 0.5 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.5 0.5 0.5 1.0</ambient>
-          <diffuse>0.5 0.5 0.5 1.0</diffuse>
-          <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
-      </visual>
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>0.5 0.5 0.1</size>
-          </box>
-        </geometry>
-      </collision>
+    <plugin name="gz::sim::systems::SailLiftDrag"
+        filename="asv_sim2-sail-lift-drag-system">
+      <a0>0.0</a0>
+      <cla>6.2832</cla>
+      <alpha_stall>0.1592</alpha_stall>
+      <cla_stall>-0.7083</cla_stall>
+      <cda>0.63662</cda>
+      <area>0.04858</area>
+      <fluid_density>1.2</fluid_density>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <cp>-0.015 0.0 0.2</cp>
+      <link_name>wing_sail_elevator_link</link_name>
+      <radial_symmetry>true</radial_symmetry>
+      <topic>lift_drag</topic>
+    </plugin>
 
-      <visual name="imu_visual">
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.01</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.0 1.0 0.0 1.0</ambient>
-          <diffuse>0.0 1.0 0.0 1.0</diffuse>
-          <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
-      </visual>
-
-      <sensor name="imu_sensor" type="imu">
-        <pose>0 0 0 3.141593 0 0</pose>
-        <always_on>1</always_on>
-        <update_rate>1000</update_rate>
-        <visualize>1</visualize>
-        <topic>sensors/imu</topic>
-        <imu>
-          <topic>sensors/imu</topic>
-          <angular_velocity/>
-          <linear_acceleration/>
-        </imu>
-      </sensor>
-
+    <!-- Wing sail -->
+    <link name="wing_sail_link">
       <inertial>
-        <mass>1000</mass>
+        <pose>-0.05 0.0 0.65 0 0 0</pose>
+        <mass>2.0</mass>
         <inertia>
-          <ixx>21.66666667</ixx>
+          <ixx>0.326733333</ixx>
           <ixy>0</ixy>
-          <iyy>21.66666667</iyy>
+          <iyy>0.348266667</iyy>
           <iyz>0</iyz>
-          <izz>41.666667</izz>
+          <izz>0.021666667</izz>
         </inertia>
       </inertial>
-    </link>
-
-    <link name="wing_sail_link">
-      <pose>0 0 0.05 0 0 0</pose>
+      <collision name="wing_sail_collision">
+        <geometry>
+          <mesh>
+            <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
       <visual name="wing_sail_visual">
         <geometry>
           <mesh>
@@ -112,8 +91,21 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-
-      <visual name="cp_wing_sail_visual">
+      <visual name="elevator_spar_visual">
+        <pose>-0.25 0 0.65 0 1.570796 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.007</radius>
+            <length>1.000</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1.0</ambient>
+          <diffuse>0.5 0.5 0.5 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+      <visual name="cp_visual">
         <pose>-0.05 0 0.65 0 0 0</pose>
         <geometry>
           <sphere>
@@ -126,40 +118,64 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
+    </link>
 
-      <collision name="wing_sail_collision">
+    <!-- Wing sail elevator -->
+    <link name="wing_sail_elevator_link">
+      <pose>-0.5 0 0.45 0 0 0</pose>
+      <inertial>
+        <pose>-0.015 0.0 0.2 1.570796 1.570796 0</pose>
+        <mass>0.0632455</mass>
+        <inertia>
+          <ixx>6.75281E-05</ixx>
+          <ixy>0</ixy>
+          <iyy>0.001029888</iyy>
+          <iyz>0</iyz>
+          <izz>0.001096957</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://land_yacht/meshes/wing_sail.stl</uri>
+            <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
           </mesh>
         </geometry>
       </collision>
-
-      <inertial>
-        <pose>-0.05 0.0 0.65 0 0 0</pose>
-        <mass>2.0</mass>
-        <inertia>
-          <ixx>0.326733333</ixx>
-          <ixy>0</ixy>
-          <iyy>0.348266667</iyy>
-          <iyz>0</iyz>
-          <izz>0.021666667</izz>
-        </inertia>
-      </inertial>
+      <visual name="wing_sail_elevator_visual">
+        <geometry>
+          <mesh>
+            <uri>model://land_yacht/meshes/wing_sail_elevator.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1.0 0.4 0.0 0.9</ambient>
+          <diffuse>1.0 0.4 0.0 0.9</diffuse>
+          <specular>0.1 0.1 0.1 0.9</specular>
+        </material>
+      </visual>
+      <visual name="cp_visual">
+        <pose>-0.015 0 0.2 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.01</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <ambient>1.0 0.0 0.0 1.0</ambient>
+          <diffuse>1.0 0.0 0.0 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
     </link>
 
-    <joint type="revolute" name="wing_sail_joint">
-      <pose> 0 0 0 0 0 0</pose>
-      <child>wing_sail_link</child>
-      <parent>base_link</parent>
+    <joint name="wing_sail_elevator_joint" type="revolute">
+      <pose>0 0 0.2 0 0 0</pose>
+      <child>wing_sail_elevator_link</child>
+      <parent>wing_sail_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1.0E16</lower>
-          <upper>1.0E16</upper>
-        </limit>
         <dynamics>
-          <damping>0.1</damping>
+          <damping>0.01</damping>
         </dynamics>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
@@ -169,8 +185,26 @@
       </sensor>
     </joint>
 
-    <!-- <link name="wing_sail_counterweight_link">
-      <pose>0.65 0 0.70 0 0 0</pose>
+    <!-- Wing sail counterweight -->
+    <link name="wing_sail_counterweight_link">
+      <pose>0.15 0 0.65 0 0 0</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.00025</ixx>
+          <ixy>0</ixy>
+          <iyy>0.00025</iyy>
+          <iyz>0</iyz>
+          <izz>0.00025</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+      </collision>
       <visual name="visual">
         <geometry>
           <sphere>
@@ -183,31 +217,12 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-
-      <collision name="collision">
-        <geometry>
-          <sphere>
-            <radius>0.025</radius>
-          </sphere>
-        </geometry>
-      </collision>
-
-      <inertial>
-        <mass>0.1</mass>
-        <inertia>
-          <ixx>0.0025</ixx>
-          <ixy>0</ixy>
-          <iyy>0.0025</iyy>
-          <iyz>0</iyz>
-          <izz>0.0025</izz>
-        </inertia>
-      </inertial>
     </link>
 
-    <joint type="fixed" name="wing_sail_counterweight_joint">
+    <joint name="wing_sail_counterweight_joint" type="fixed">
       <child>wing_sail_counterweight_link</child>
       <parent>wing_sail_link</parent>
-    </joint> -->
+    </joint>
 
   </model>
 </sdf>
