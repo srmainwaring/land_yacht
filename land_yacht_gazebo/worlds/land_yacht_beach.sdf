@@ -282,8 +282,7 @@
         <control channel="3">
           <jointName>land_yacht::wing_sail::wing_sail_elevator_joint</jointName>
           <useForce>1</useForce>
-          <!-- <multiplier>0.34906585</multiplier> -->
-          <multiplier>1.5</multiplier>
+          <multiplier>0.34906585</multiplier>
           <offset>-0.5</offset>
           <servo_min>1000</servo_min>
           <servo_max>2000</servo_max>
