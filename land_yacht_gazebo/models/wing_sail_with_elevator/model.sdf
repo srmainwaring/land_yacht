@@ -31,8 +31,7 @@
       <cla>6.2832</cla>
       <alpha_stall>0.1592</alpha_stall>
       <cla_stall>-0.7083</cla_stall>
-      <!-- <cda>0.63662</cda> -->
-      <cda>0.3</cda>
+      <cda>0.63662</cda>
       <area>0.4858</area>
       <fluid_density>1.2</fluid_density>
       <forward>1 0 0</forward>
@@ -49,8 +48,7 @@
       <cla>6.2832</cla>
       <alpha_stall>0.1592</alpha_stall>
       <cla_stall>-0.7083</cla_stall>
-      <!-- <cda>0.63662</cda> -->
-      <cda>0.3</cda>
+      <cda>0.63662</cda>
       <area>0.04858</area>
       <fluid_density>1.2</fluid_density>
       <forward>1 0 0</forward>
@@ -197,11 +195,11 @@
       <inertial>
         <mass>0.1</mass>
         <inertia>
-          <ixx>0.00025</ixx>
+          <ixx>0.000025</ixx>
           <ixy>0</ixy>
-          <iyy>0.00025</iyy>
+          <iyy>0.000025</iyy>
           <iyz>0</iyz>
-          <izz>0.00025</izz>
+          <izz>0.000025</izz>
         </inertia>
       </inertial>
       <collision name="collision">
