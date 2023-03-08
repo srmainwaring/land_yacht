@@ -47,7 +47,7 @@
     </light>
 
     <wind>
-      <linear_velocity>3 3 0</linear_velocity>
+      <linear_velocity>1 1 0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -175,7 +175,7 @@
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::wing_sail::wing_sail_elevator_joint</joint_name>
         <topic>/trim</topic>
-        <p_gain>2</p_gain>
+        <p_gain>20</p_gain>
         <i_gain>0.2</i_gain>
         <d_gain>0</d_gain>
         <i_max>1</i_max>
@@ -221,8 +221,8 @@
           <d_gain>0</d_gain>
           <i_max>1</i_max>
           <i_min>-1</i_min>
-          <cmd_max>1000</cmd_max>
-          <cmd_min>-1000</cmd_min> -->
+          <cmd_max>100</cmd_max>
+          <cmd_min>-100</cmd_min> -->
         </control>
 
         <!--
@@ -290,7 +290,7 @@
         <!-- <control channel="3"> -->
         <control channel="2">
           <jointName>land_yacht::wing_sail::wing_sail_elevator_joint</jointName>
-          <useForce>1</useForce> -->
+          <useForce>1</useForce>
           <!-- <multiplier>0.34906585</multiplier> -->
           <multiplier>1.5</multiplier>
           <offset>-0.5</offset>

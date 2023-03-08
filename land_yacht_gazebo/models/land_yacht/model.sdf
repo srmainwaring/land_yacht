@@ -209,6 +209,10 @@
         <dynamics>
           <damping>0.001</damping>
         </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
       </axis>
     </joint>
 
@@ -256,6 +260,10 @@
         <dynamics>
           <damping>0.001</damping>
         </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
       </axis>
     </joint>
 
@@ -304,6 +312,9 @@
       <parent>base_link</parent>
       <axis>
         <xyz>-1 0 0.700207538</xyz>
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
         <limit>
           <lower>-0.8</lower>
           <upper>0.8</upper>
@@ -355,6 +366,10 @@
         <dynamics>
           <damping>0.001</damping>
         </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
       </axis>
     </joint>
 
@@ -373,6 +388,10 @@
         <dynamics>
           <damping>0.1</damping>
         </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
         <always_on>true</always_on>
@@ -394,7 +413,7 @@
       <axis>
         <xyz>0 0 1</xyz>
         <dynamics>
-          <damping>0.1</damping>
+          <damping>0.01</damping>
         </dynamics>
         <limit>
           <lower>-1.396263402</lower>
@@ -492,6 +511,10 @@
         <dynamics>
           <damping>0.001</damping>
         </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
         <always_on>true</always_on>
