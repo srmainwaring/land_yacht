@@ -179,6 +179,10 @@
         <dynamics>
           <damping>0.01</damping>
         </dynamics>
+        <limit>
+          <lower>-1.570796327</lower>
+          <upper>1.570796327</upper>
+        </limit>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
         <always_on>true</always_on>
@@ -221,9 +225,19 @@
       </visual>
     </link>
 
-    <joint name="wing_sail_counterweight_joint" type="fixed">
+    <joint name="wing_sail_counterweight_joint" type="revolute">
       <child>wing_sail_counterweight_link</child>
       <parent>wing_sail_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+      </axis>
     </joint>
 
   </model>
