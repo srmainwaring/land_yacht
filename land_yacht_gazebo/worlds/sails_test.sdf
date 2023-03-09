@@ -1,4 +1,18 @@
 <?xml version="1.0" ?>
+<!-- 
+  Usage
+    1. Run simulation
+    gz sim -v4 -r sails_test.sdf
+
+    2. Set wing sail angle
+    gz topic -t "/angle" -m gz.msgs.Double -p "data: 0.5"
+
+    3. Set wing sail with elevator angle
+    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.5"
+
+    4. Set main sail sheet
+    gz topic -t "/sheet" -m gz.msgs.Double -p "data: 0.5"
+ -->
 <sdf version="1.6">
   <world name="sails_test">
     <physics name="1ms" type="ignored">
