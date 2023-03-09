@@ -1,4 +1,16 @@
 <?xml version="1.0" ?>
+<!-- 
+  Usage
+    1. Run simulation
+    gz sim -v4 -r land_yacht_beach.sdf
+
+    2. Set steering
+    gz topic -t "/steer" -m gz.msgs.Double -p "data: 1.0"
+
+    3. Set wing sail with elevator angle
+    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.5"
+ -->
+
 <sdf version="1.6">
   <world name="land_yacht_beach">
     <physics name="1ms" type="ignored">
