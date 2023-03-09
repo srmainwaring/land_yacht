@@ -59,7 +59,7 @@
     </light>
 
     <wind>
-      <linear_velocity>-2 0 0</linear_velocity>
+      <linear_velocity>-4 0 0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -174,26 +174,26 @@
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::steering_joint</joint_name>
         <topic>/steer</topic>
-        <p_gain>0.4</p_gain>
+        <p_gain>5</p_gain>
         <i_gain>0.01</i_gain>
         <d_gain>0.01</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>20</cmd_max>
-        <cmd_min>-20</cmd_min>
+        <cmd_max>100</cmd_max>
+        <cmd_min>-100</cmd_min>
       </plugin>
 
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::wing_sail::wing_sail_elevator_joint</joint_name>
         <topic>/trim</topic>
-        <p_gain>20</p_gain>
-        <i_gain>0.2</i_gain>
+        <p_gain>0.4</p_gain>
+        <i_gain>0.01</i_gain>
         <d_gain>0</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>100</cmd_max>
-        <cmd_min>-100</cmd_min>
+        <cmd_max>5</cmd_max>
+        <cmd_min>-5</cmd_min>
       </plugin>
 
       <plugin name="ArduPilotPlugin"
