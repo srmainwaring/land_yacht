@@ -103,37 +103,12 @@
         <visualize>1</visualize>
       </sensor>
 
-      <!-- <sensor name="camera" type="camera">
-        <always_on>1</always_on>
-        <update_rate>30</update_rate>
-        <camera name="camera">
-          <horizontal_fov>1.047</horizontal_fov>
-          <image>
-            <width>800</width>
-            <height>800</height>
-            <format>R8G8B8</format>
-          </image>
-          <clip>
-            <near>0.02</near>
-            <far>300</far>
-          </clip>
-        </camera>
-        <pose>0.5 0 0.3 0 0 0</pose>
-      </sensor> -->
-
-      <!-- <sensor name="anemometer_sensor" type="anemometer">
-        <pose>0 0 0 0 0 0</pose>
-        <always_on>true</always_on>
-        <update_rate>50</update_rate>
-        <topic>anemometer</topic>
-      </sensor>
-
       <visual name="anemometer_visual">
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0.67 0 0.72 0 0 0</pose>
         <geometry>
           <cylinder>
-            <radius>0.025</radius>
-            <length>0.025</length>
+            <radius>0.034</radius>
+            <length>0.04</length>
           </cylinder>
         </geometry>
         <material>
@@ -141,16 +116,26 @@
           <diffuse>1.0 0.0 0.0 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
-      </visual> -->
+      </visual>
+
+      <sensor name="anemometer" type="custom" gz:type="anemometer">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <topic>anemometer</topic>
+        <gz:anemometer>
+          <noise type="gaussian">
+            <mean>0.2</mean>
+            <stddev>0.1</stddev>
+          </noise>
+        </gz:anemometer>
+      </sensor>
 
       <!-- Approximate LY base inertial with a solid cuboid:
         m  = 3.544 kg
         Lx = 0.25 m
         Ly = 0.16 m
         Lz = 0.06 m
-
-        as most of the mass is located at the 
-        intersection of the two beams.
+        as most of the mass is located at the intersection of the two beams.
       -->
       <inertial>
         <pose>0.15 0 0.04 0 0 0</pose>
