@@ -226,6 +226,7 @@
         <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
         <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
         <imuName>land_yacht::base_link::imu_sensor</imuName>
+        <anemometer>land_yacht::base_link::anemometer</anemometer>
 
         <!-- Control / channels -->
         <!--
