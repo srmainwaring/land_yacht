@@ -74,8 +74,11 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
+    <!-- Gazebo world frame is aligned ENU -->
+
+    <!-- Wind from the North - along negative y-axis -->
     <wind>
-      <linear_velocity>-4 0 0</linear_velocity>
+      <linear_velocity>0 -5 0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -176,6 +179,8 @@
     </model>
 
     <model name="land_yacht_with_ardupilot">
+      <pose>0 0 0 0 0 1.57079632</pose>
+
       <include>
         <pose>0 0 0.08 0 0 0</pose>
         <uri>model://land_yacht</uri>
@@ -218,8 +223,8 @@
         <fdm_port_in>9002</fdm_port_in>
         <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
         <lock_step>1</lock_step>
+        <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
         <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
-        <gazeboXYZToNED>0 0 0 3.141593 0 0</gazeboXYZToNED>
         <imuName>land_yacht::base_link::imu_sensor</imuName>
 
         <!-- Control / channels -->
