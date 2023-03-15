@@ -348,28 +348,6 @@
       <axis>
         <xyz>0 0 1</xyz>
         <dynamics>
-          <damping>0.001</damping>
-        </dynamics>
-        <limit>
-          <lower>-1.0E8</lower>
-          <upper>1.0E8</upper>
-        </limit>
-      </axis>
-    </joint>
-
-    <!-- Wing sail -->
-    <include>
-      <pose>0.5 0 0.1 0 0 0</pose>
-      <uri>model://wing_sail_with_elevator</uri>
-      <name>wing_sail</name>
-    </include>
-
-    <joint type="revolute" name="wing_sail_joint">
-      <child>wing_sail::wing_sail_link</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <dynamics>
           <damping>0.01</damping>
         </dynamics>
         <limit>
@@ -542,6 +520,35 @@
       <upward>0 0 1</upward>
       <link_name>thruster_link</link_name>
     </plugin> -->
+
+    <!-- Wing sail with elevator -->
+    <!-- <include>
+      <pose>0.5 0 0.1 0 0 0</pose>
+      <uri>model://wing_sail_with_elevator</uri>
+      <name>wing_sail</name>
+    </include> -->
+
+    <!-- Wing sail -->
+    <include>
+      <pose>0.5 0 0.1 0 0 0</pose>
+      <uri>model://wing_sail</uri>
+      <name>wing_sail</name>
+    </include>
+
+    <joint type="revolute" name="wing_sail_joint">
+      <child>wing_sail::wing_sail_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
+      </axis>
+    </joint>
 
   </model>
 </sdf>
