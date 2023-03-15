@@ -73,10 +73,14 @@
         </inertia>
       </inertial>
       <collision name="wing_sail_collision">
+        <pose>-0.09 0 0.7 0 0 0</pose>
         <geometry>
-          <mesh>
+          <!-- <mesh>
             <uri>model://wing_sail_with_elevator/meshes/wing_sail.stl</uri>
-          </mesh>
+          </mesh> -->
+          <box>
+            <size>0.35 0.07 1.4</size>
+          </box>
         </geometry>
       </collision>
       <visual name="wing_sail_visual">
@@ -135,10 +139,14 @@
         </inertia>
       </inertial>
       <collision name="collision">
+        <pose>-0.028 0 0.22 0 0 0</pose>
         <geometry>
-          <mesh>
+          <!-- <mesh>
             <uri>model://wing_sail_with_elevator/meshes/wing_sail_elevator.stl</uri>
-          </mesh>
+          </mesh> -->
+          <box>
+            <size>0.11 0.02 0.44</size>
+          </box>
         </geometry>
       </collision>
       <visual name="wing_sail_elevator_visual">

@@ -55,10 +55,14 @@
         </inertia>
       </inertial>
       <collision name="wing_sail_collision">
+        <pose>-0.09 0 0.7 0 0 0</pose>
         <geometry>
-          <mesh>
+          <!-- <mesh>
             <uri>model://wing_sail/meshes/wing_sail.stl</uri>
-          </mesh>
+          </mesh> -->
+          <box>
+            <size>0.35 0.07 1.4</size>
+          </box>
         </geometry>
       </collision>
       <visual name="wing_sail_visual">
