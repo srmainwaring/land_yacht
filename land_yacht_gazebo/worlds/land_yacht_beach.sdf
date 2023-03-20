@@ -78,7 +78,7 @@
 
     <!-- Wind from the North - along negative y-axis -->
     <wind>
-      <linear_velocity>0 -5 0</linear_velocity>
+      <linear_velocity>0 -7 0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -195,13 +195,13 @@
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::steering_joint</joint_name>
         <topic>/steering_joint/cmd_pos</topic>
-        <p_gain>40</p_gain>
+        <p_gain>2</p_gain>
         <i_gain>0.0</i_gain>
         <d_gain>0.1</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>50</cmd_max>
-        <cmd_min>-50</cmd_min>
+        <cmd_max>10</cmd_max>
+        <cmd_min>-10</cmd_min>
       </plugin>
 
       <!-- <plugin filename="gz-sim-joint-position-controller-system"
@@ -222,13 +222,13 @@
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::wing_sail_joint</joint_name>
         <topic>/wing_sail_joint/cmd_pos</topic>
-        <p_gain>50</p_gain>
+        <p_gain>2</p_gain>
         <i_gain>0.0</i_gain>
         <d_gain>0.1</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>200</cmd_max>
-        <cmd_min>-200</cmd_min>
+        <cmd_max>10</cmd_max>
+        <cmd_min>-10</cmd_min>
       </plugin>
 
       <plugin name="ArduPilotPlugin"
