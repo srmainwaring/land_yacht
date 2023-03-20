@@ -5,10 +5,10 @@
     gz sim -v4 -r sails_test.sdf
 
     2. Set wing sail angle
-    gz topic -t "/angle" -m gz.msgs.Double -p "data: 0.5"
+    gz topic -t "/angle" -m gz.msgs.Double -p "data: -0.6"
 
     3. Set wing sail with elevator angle
-    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.5"
+    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.4"
 
     4. Set main sail sheet
     gz topic -t "/sheet" -m gz.msgs.Double -p "data: 0.5"
@@ -67,7 +67,7 @@
     </light>
 
     <wind>
-      <linear_velocity>-3.5 0.0 0.0</linear_velocity>
+      <linear_velocity>-3.5 3.5 0.0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -202,7 +202,7 @@
 
       <include>
         <pose>0 0 0.05 0 0 0</pose>
-        <uri>model://wing_sail</uri>
+        <uri>model://wing_sail_naca0018_1.4m</uri>
         <name>wing_sail</name>
       </include>
 
@@ -282,7 +282,7 @@
 
       <include>
           <pose>0 0 0.05 0 0 0</pose>
-          <uri>model://wing_sail_with_elevator</uri>
+          <uri>model://wing_sail_naca0018_1.4m_with_elevator</uri>
           <name>wing_sail</name>
       </include>
 
@@ -315,8 +315,8 @@
         name="gz::sim::systems::JointStatePublisher">
       </plugin>
 
-      <plugin filename="gz-sim-joint-position-controller-system"
-          name="gz::sim::systems::JointPositionController">
+      <plugin filename="asv_sim2-sail-position-controller-system"
+          name="gz::sim::systems::SailPositionController">
         <joint_name>main_sail_joint</joint_name>
         <topic>/sheet</topic>
         <p_gain>20</p_gain>
@@ -361,9 +361,9 @@
       </link>
 
       <include>
-          <pose>0 0 0.05 0 -0.20943951 0</pose>
-          <uri>model://land_yacht_main_sail</uri>
-          <name>main_sail</name>
+        <pose>0 0 0.05 0 -0.20943951 0</pose>
+        <uri>model://land_yacht_main_sail</uri>
+        <name>main_sail</name>
       </include>
 
       <joint type="revolute" name="main_sail_joint">

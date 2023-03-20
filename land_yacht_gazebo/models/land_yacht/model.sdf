@@ -524,14 +524,14 @@
     <!-- Wing sail with elevator -->
     <!-- <include>
       <pose>0.5 0 0.1 0 0 0</pose>
-      <uri>model://wing_sail_with_elevator</uri>
+      <uri>model://wing_sail_naca0018_1.4m_with_elevator</uri>
       <name>wing_sail</name>
     </include> -->
 
     <!-- Wing sail -->
     <include>
       <pose>0.5 0 0.1 0 0 0</pose>
-      <uri>model://wing_sail</uri>
+      <uri>model://wing_sail_naca0018_1.4m</uri>
       <name>wing_sail</name>
     </include>
 

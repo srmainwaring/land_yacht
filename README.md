@@ -29,6 +29,6 @@ gz sim -v4 -r land_yacht_beach.sdf
 #### Run ArduPilot SITL
 
 ```bash
-sim_vehicle.py -v Rover -f JSON --add-param-file=$HOME/land_yacht/land_yacht_gazebo/config/landyacht_wingsail.param --console --map
+sim_vehicle.py -v Rover -f JSON --add-param-file=$HOME/land_yacht/land_yacht_gazebo/config/land_yacht_wingsail.param --console --map
 ```
 

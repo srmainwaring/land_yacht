@@ -16,7 +16,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <sdf version="1.6">
-  <model name="wing_sail">
+  <model name="wing_sail_naca0018_1.4m">
 
     <!-- Plugins -->
 
@@ -58,7 +58,7 @@
         <pose>-0.09 0 0.7 0 0 0</pose>
         <geometry>
           <!-- <mesh>
-            <uri>model://wing_sail/meshes/wing_sail.stl</uri>
+            <uri>model://wing_sail_naca0018_1.4m/meshes/wing_sail.stl</uri>
           </mesh> -->
           <box>
             <size>0.35 0.07 1.4</size>
@@ -68,7 +68,7 @@
       <visual name="wing_sail_visual">
         <geometry>
           <mesh>
-            <uri>model://wing_sail/meshes/wing_sail.stl</uri>
+            <uri>model://wing_sail_naca0018_1.4m/meshes/wing_sail.stl</uri>
           </mesh>
         </geometry>
         <material>
