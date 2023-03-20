@@ -50,14 +50,14 @@
           <izz>0.066666667</izz>
         </inertia>
       </inertial>
-      <collision name="main_sail_collision">
+      <collision name="sail_collision">
         <geometry>
           <mesh>
             <uri>model://land_yacht_main_sail/meshes/land_yacht_rig.stl</uri>
           </mesh>
         </geometry>
       </collision>
-      <visual name="main_rig_visual">
+      <visual name="rig_visual">
         <geometry>
           <mesh>
             <uri>model://land_yacht_main_sail/meshes/land_yacht_rig.stl</uri>
@@ -69,7 +69,7 @@
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
       </visual>
-      <visual name="main_sail_visual">
+      <visual name="sail_visual">
         <pose>-0.01 0 0.12 0 0.20943951 0</pose>
         <geometry>
           <mesh>

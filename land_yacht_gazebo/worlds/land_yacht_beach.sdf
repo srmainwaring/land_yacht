@@ -194,14 +194,14 @@
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::steering_joint</joint_name>
-        <topic>/steer</topic>
-        <p_gain>20</p_gain>
+        <topic>/steering_joint/cmd_pos</topic>
+        <p_gain>40</p_gain>
         <i_gain>0.0</i_gain>
         <d_gain>0.1</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>5</cmd_max>
-        <cmd_min>-5</cmd_min>
+        <cmd_max>50</cmd_max>
+        <cmd_min>-50</cmd_min>
       </plugin>
 
       <!-- <plugin filename="gz-sim-joint-position-controller-system"
@@ -221,14 +221,14 @@
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
         <joint_name>land_yacht::wing_sail_joint</joint_name>
-        <topic>/trim</topic>
-        <p_gain>20</p_gain>
+        <topic>/wing_sail_joint/cmd_pos</topic>
+        <p_gain>50</p_gain>
         <i_gain>0.0</i_gain>
         <d_gain>0.1</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>5</cmd_max>
-        <cmd_min>-5</cmd_min>
+        <cmd_max>200</cmd_max>
+        <cmd_min>-200</cmd_min>
       </plugin>
 
       <plugin name="ArduPilotPlugin"
@@ -262,7 +262,7 @@
           <servo_min>1000</servo_min>
           <servo_max>2000</servo_max>
           <type>COMMAND</type>
-          <cmd_topic>/steer</cmd_topic>
+          <cmd_topic>/steering_joint/cmd_pos</cmd_topic>
         </control>
 
         <!--
@@ -360,7 +360,7 @@
           <servo_min>1000</servo_min>
           <servo_max>2000</servo_max>
           <type>COMMAND</type>
-          <cmd_topic>/trim</cmd_topic>
+          <cmd_topic>/wing_sail_joint/cmd_pos</cmd_topic>
         </control>
 
       </plugin>
