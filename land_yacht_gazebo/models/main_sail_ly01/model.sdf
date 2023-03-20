@@ -16,7 +16,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <sdf version="1.6">
-  <model name="land_yacht_main_sail">
+  <model name="main_sail_ly01">
 
     <!-- Plugins -->
     <plugin name="gz::sim::systems::SailLiftDrag"
@@ -53,14 +53,14 @@
       <collision name="sail_collision">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_main_sail/meshes/land_yacht_rig.stl</uri>
+            <uri>model://main_sail_ly01/meshes/land_yacht_rig.stl</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="rig_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_main_sail/meshes/land_yacht_rig.stl</uri>
+            <uri>model://main_sail_ly01/meshes/land_yacht_rig.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -73,7 +73,7 @@
         <pose>-0.01 0 0.12 0 0.20943951 0</pose>
         <geometry>
           <mesh>
-            <uri>model://land_yacht_main_sail/meshes/land_yacht_flat_sail.stl</uri>
+            <uri>model://main_sail_ly01/meshes/land_yacht_flat_sail.stl</uri>
           </mesh>
         </geometry>
         <material>

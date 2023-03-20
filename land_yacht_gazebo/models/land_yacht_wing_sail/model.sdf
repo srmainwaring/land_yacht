@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+  Copyright (C) 2019-2023 Rhys Mainwaring
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<sdf version="1.6">
+  <model name="land_yacht_wing_sail">
+
+    <include>
+      <uri>model://land_yacht_base</uri>
+      <name>land_yacht_base</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Main sail -->
+    <!-- <include>
+      <pose>0.5 0 0.04 0 -0.20943951 0</pose>
+      <uri>model://main_sail_ly01</uri>
+      <name>main_sail</name>
+    </include>
+
+    <joint type="revolute" name="main_sail_joint">
+      <child>main_sail::main_sail_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
+        <limit>
+          <lower>-1.396263402</lower>
+          <upper>1.396263402</upper>
+        </limit>
+      </axis>
+      <sensor name="force_torque_sensor" type="force_torque">
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+        <visualize>false</visualize>
+      </sensor>
+    </joint> -->
+
+    <!-- Wing sail -->
+    <include>
+      <pose>0.5 0 0.1 0 0 0</pose>
+      <uri>model://wing_sail_naca0018_1.4m</uri>
+      <name>wing_sail</name>
+    </include>
+
+    <joint type="revolute" name="wing_sail_joint">
+      <child>wing_sail::wing_sail_link</child>
+      <parent>land_yacht_base::base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0.01</damping>
+        </dynamics>
+        <limit>
+          <lower>-1.0E8</lower>
+          <upper>1.0E8</upper>
+        </limit>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

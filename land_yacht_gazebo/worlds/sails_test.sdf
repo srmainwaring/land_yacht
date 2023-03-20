@@ -362,7 +362,7 @@
 
       <include>
         <pose>0 0 0.05 0 -0.20943951 0</pose>
-        <uri>model://land_yacht_main_sail</uri>
+        <uri>model://main_sail_ly01</uri>
         <name>main_sail</name>
       </include>
 

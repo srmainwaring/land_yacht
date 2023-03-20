@@ -168,7 +168,7 @@
             <specular>0.01 0.01 0.01</specular>
             <pbr>
               <metal>
-                <albedo_map>model://land_yacht/materials/textures/beach_sand.jpg</albedo_map>
+                <albedo_map>model://land_yacht_base/materials/textures/beach_sand.jpg</albedo_map>
                 <metalness>0</metalness>
                 <roughness>1</roughness>
               </metal>
@@ -183,7 +183,7 @@
 
       <include>
         <pose>0 0 0.08 0 0 0</pose>
-        <uri>model://land_yacht</uri>
+        <uri>model://land_yacht_wing_sail</uri>
         <name>land_yacht</name>
       </include>
 
@@ -193,7 +193,7 @@
 
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
-        <joint_name>land_yacht::steering_joint</joint_name>
+        <joint_name>land_yacht::land_yacht_base::steering_joint</joint_name>
         <topic>/steering_joint/cmd_pos</topic>
         <p_gain>2</p_gain>
         <i_gain>0.0</i_gain>
@@ -239,8 +239,8 @@
         <lock_step>1</lock_step>
         <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
         <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
-        <imuName>land_yacht::base_link::imu_sensor</imuName>
-        <anemometer>land_yacht::base_link::anemometer</anemometer>
+        <imuName>land_yacht::land_yacht_base::base_link::imu_sensor</imuName>
+        <anemometer>land_yacht::land_yacht_base::base_link::anemometer</anemometer>
 
         <!-- Control / channels -->
         <!--
@@ -255,7 +255,7 @@
           in the opposite direction to a rudder)
         -->
         <control channel="0">
-          <jointName>land_yacht::steering_joint</jointName>
+          <jointName>land_yacht::land_yacht_base::steering_joint</jointName>
           <useForce>1</useForce>
           <multiplier>-1.570796</multiplier>
           <offset>-0.5</offset>
