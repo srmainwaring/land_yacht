@@ -119,6 +119,7 @@
       </visual>
 
       <sensor name="anemometer" type="custom" gz:type="anemometer">
+        <pose>0.67 0 0.72 0 0 0</pose>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
         <gz:anemometer>
