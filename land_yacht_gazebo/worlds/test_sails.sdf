@@ -14,7 +14,7 @@
     gz topic -t "/sheet" -m gz.msgs.Double -p "data: 0.5"
  -->
 <sdf version="1.6">
-  <world name="sails_test">
+  <world name="test">
     <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
