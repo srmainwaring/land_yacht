@@ -4,14 +4,11 @@
     1. Run simulation
     gz sim -v4 -r sails_test.sdf
 
-    2. Set wing sail angle
-    gz topic -t "/angle" -m gz.msgs.Double -p "data: -0.6"
+    2. Set turntable position
+    gz topic -t "/turntable_joint/cmd_pos" -m gz.msgs.Double -p "data: 0.7854"
 
-    3. Set wing sail with elevator angle
-    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.4"
-
-    4. Set main sail sheet
-    gz topic -t "/sheet" -m gz.msgs.Double -p "data: 0.5"
+    3. Set main sail sheet
+    gz topic -t "/main_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: 0.5"
  -->
 <sdf version="1.6">
   <world name="test">
@@ -22,9 +19,6 @@
 
     <plugin filename="gz-sim-physics-system"
         name="gz::sim::systems::Physics">
-    </plugin>
-    <plugin filename="gz-sim-forcetorque-system"
-        name="gz::sim::systems::ForceTorque">
     </plugin>
     <plugin filename="gz-sim-sensors-system"
         name="gz::sim::systems::Sensors">
@@ -66,11 +60,12 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
+    <!-- Wind: 7 m/s from the north (ENU) -->
     <wind>
-      <linear_velocity>-3.5 3.5 0.0</linear_velocity>
+      <linear_velocity>0 -7 0.0</linear_velocity>
     </wind>
 
-    <model name="axes">
+    <!-- <model name="axes">
       <static>1</static>
       <link name="link">
         <visual name="r">
@@ -119,7 +114,7 @@
           </material>
         </visual>
       </link>
-    </model>
+    </model> -->
 
     <model name="ground_plane">
       <static>true</static>
@@ -148,195 +143,50 @@
       </link>
     </model>
 
-    <model name="wing_sail_test">
-      <pose>0 0 0.05 0 0 0</pose>
-
-      <plugin filename="gz-sim-joint-state-publisher-system"
-        name="gz::sim::systems::JointStatePublisher">
-      </plugin>
-
-      <plugin filename="gz-sim-joint-position-controller-system"
-          name="gz::sim::systems::JointPositionController">
-        <joint_name>wing_sail_joint</joint_name>
-        <topic>/angle</topic>
-        <p_gain>2</p_gain>
-        <i_gain>0.1</i_gain>
-        <d_gain>0.05</d_gain>
-        <i_max>1</i_max>
-        <i_min>-1</i_min>
-        <cmd_max>1000</cmd_max>
-        <cmd_min>-1000</cmd_min>
-      </plugin>
-
-      <link name="base_link">
-        <inertial>
-          <mass>1000</mass>
-          <inertia>
-            <ixx>21.66666667</ixx>
-            <ixy>0</ixy>
-            <iyy>21.66666667</iyy>
-            <iyz>0</iyz>
-            <izz>41.666667</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.1</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.1</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 0.5 1.0</ambient>
-            <diffuse>0.5 0.5 0.5 1.0</diffuse>
-            <specular>0.1 0.1 0.1 1.0</specular>
-          </material>
-        </visual>
-      </link>
-
-      <include>
-        <pose>0 0 0.05 0 0 0</pose>
-        <uri>model://wing_sail_naca0018_1.4m</uri>
-        <name>wing_sail</name>
-      </include>
-
-      <joint name="wing_sail_joint" type="revolute" >
-        <pose> 0 0 0.05 0 0 0</pose>
-        <child>wing_sail::wing_sail_link</child>
-        <parent>base_link</parent>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <dynamics>
-            <damping>0.01</damping>
-          </dynamics>
-          <limit>
-            <lower>-1.0E+8</lower>
-            <upper>1.0E+8</upper>
-          </limit>
-        </axis>
-        <sensor name="force_torque_sensor" type="force_torque">
-          <always_on>true</always_on>
-          <update_rate>30</update_rate>
-          <visualize>true</visualize>
-        </sensor>
-      </joint>
-    </model>
-
-    <model name="wing_sail_with_elevator_test">
-      <pose>1 -1 0.05 0 0 0</pose>
-
-      <plugin filename="gz-sim-joint-state-publisher-system"
-        name="gz::sim::systems::JointStatePublisher">
-      </plugin>
-
-      <plugin filename="gz-sim-joint-position-controller-system"
-          name="gz::sim::systems::JointPositionController">
-        <joint_name>wing_sail::wing_sail_elevator_joint</joint_name>
-        <topic>/trim</topic>
-        <p_gain>1</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>0</d_gain>
-        <i_max>1</i_max>
-        <i_min>-1</i_min>
-        <cmd_max>1000</cmd_max>
-        <cmd_min>-1000</cmd_min>
-      </plugin>
-
-      <link name="base_link">
-        <inertial>
-          <mass>1000</mass>
-          <inertia>
-            <ixx>21.66666667</ixx>
-            <ixy>0</ixy>
-            <iyy>21.66666667</iyy>
-            <iyz>0</iyz>
-            <izz>41.666667</izz>
-          </inertia>
-        </inertial>
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.1</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.1</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0.5 0.5 0.5 1.0</ambient>
-            <diffuse>0.5 0.5 0.5 1.0</diffuse>
-            <specular>0.1 0.1 0.1 1.0</specular>
-          </material>
-        </visual>
-      </link>
-
-      <include>
-          <pose>0 0 0.05 0 0 0</pose>
-          <uri>model://wing_sail_naca0018_1.4m_with_elevator</uri>
-          <name>wing_sail</name>
-      </include>
-
-      <joint name="wing_sail_joint" type="revolute">
-        <pose> 0 0 0.05 0 0 0</pose>
-        <child>wing_sail::wing_sail_link</child>
-        <parent>base_link</parent>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.0E8</lower>
-            <upper>1.0E8</upper>
-          </limit>
-          <dynamics>
-            <damping>0.01</damping>
-          </dynamics>
-        </axis>
-        <sensor name="force_torque_sensor" type="force_torque">
-          <always_on>true</always_on>
-          <update_rate>30</update_rate>
-          <visualize>true</visualize>
-        </sensor>
-      </joint>
-    </model>
-
     <model name="main_sail_test">
-      <pose>1 1 0.05 0 0 0</pose>
+      <pose>0 0 0.05 0 0 1.57079632</pose>
 
       <plugin filename="gz-sim-joint-state-publisher-system"
         name="gz::sim::systems::JointStatePublisher">
+      </plugin>
+
+      <plugin filename="gz-sim-joint-position-controller-system"
+          name="gz::sim::systems::JointPositionController">
+        <joint_name>turntable_joint</joint_name>
+        <topic>/turntable_joint/cmd_pos</topic>
+        <initial_position>0.0</initial_position>
+        <p_gain>100</p_gain>
+        <i_gain>0.0</i_gain>
+        <d_gain>30</d_gain>
+        <i_max>1</i_max>
+        <i_min>-1</i_min>
+        <cmd_max>1000</cmd_max>
+        <cmd_min>-1000</cmd_min>
       </plugin>
 
       <plugin filename="asv_sim2-sail-position-controller-system"
           name="gz::sim::systems::SailPositionController">
         <joint_name>main_sail_joint</joint_name>
-        <topic>/sheet</topic>
-        <p_gain>20</p_gain>
-        <i_gain>0.2</i_gain>
-        <d_gain>0</d_gain>
+        <topic>/main_sail_joint/cmd_pos</topic>
+        <initial_position>0.0</initial_position>
+        <p_gain>100</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>30</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>1000</cmd_max>
-        <cmd_min>-1000</cmd_min>
+        <cmd_max>100</cmd_max>
+        <cmd_min>-100</cmd_min>
       </plugin>
 
       <link name="base_link">
         <inertial>
           <mass>1000</mass>
           <inertia>
-            <ixx>21.66666667</ixx>
+            <ixx>21.66</ixx>
             <ixy>0</ixy>
-            <iyy>21.66666667</iyy>
+            <iyy>21.66</iyy>
             <iyz>0</iyz>
-            <izz>41.666667</izz>
+            <izz>41.66</izz>
           </inertia>
         </inertial>
         <collision name="collision">
@@ -360,8 +210,74 @@
         </visual>
       </link>
 
+      <link name="turntable_link">
+        <pose>0 0 0.075 0 0 0</pose>
+        <inertial>
+          <mass>100</mass>
+          <inertia>
+            <ixx>1.5833</ixx>
+            <ixy>0</ixy>
+            <iyy>1.5833</iyy>
+            <iyz>0</iyz>
+            <izz>3.125</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0 0 1 0.8</ambient>
+            <diffuse>0 0 1 0.8</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <sensor name="imu_sensor" type="imu">
+          <pose>0 0 0 3.141593 0 0</pose>
+          <always_on>1</always_on>
+          <update_rate>1000</update_rate>
+          <visualize>1</visualize>
+        </sensor>
+        <sensor name="anemometer" type="custom" gz:type="anemometer">
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <gz:anemometer>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>0</stddev>
+            </noise>
+          </gz:anemometer>
+        </sensor>
+      </link>
+
+      <joint type="revolute" name="turntable_joint">
+        <child>turntable_link</child>
+        <parent>base_link</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <dynamics>
+            <damping>0.01</damping>
+          </dynamics>
+          <limit>
+            <lower>-3.1415926</lower>
+            <upper>3.1415926</upper>
+          </limit>
+        </axis>
+      </joint>
+
       <include>
-        <pose>0 0 0.05 0 -0.20943951 0</pose>
+        <pose>0 0 0.1 0 -0.20943951 0</pose>
         <uri>model://main_sail_ly01</uri>
         <name>main_sail</name>
       </include>
@@ -369,7 +285,7 @@
       <joint type="revolute" name="main_sail_joint">
         <pose relative_to="main_sail::main_sail_link">0 0 0 0 0 0</pose>
         <child>main_sail::main_sail_link</child>
-        <parent>base_link</parent>
+        <parent>turntable_link</parent>
         <axis>
           <xyz>0 0 1</xyz>
           <dynamics>
@@ -380,12 +296,40 @@
             <upper>1.396263402</upper>
           </limit>
         </axis>
-        <sensor name="force_torque_sensor" type="force_torque">
-          <always_on>true</always_on>
-          <update_rate>30</update_rate>
-          <visualize>false</visualize>
-        </sensor>
       </joint>
+
+      <plugin name="ArduPilotPlugin"
+          filename="ArduPilotPlugin">
+        <fdm_addr>127.0.0.1</fdm_addr>
+        <fdm_port_in>9002</fdm_port_in>
+        <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+        <lock_step>1</lock_step>
+        <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
+        <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+        <imuName>turntable_link::imu_sensor</imuName>
+        <anemometer>turntable_link::anemometer</anemometer>
+
+        <!-- Control / channels -->
+        <!--
+          SERVO4_FUNCTION 89 (MainSail)
+          SERVO4_MIN 1000
+          SERVO4_MAX 2000
+
+          input command in [0, 1]
+          desired sail angle in [5, 50] deg
+        -->
+        <control channel="3">
+          <jointName>main_sail_joint</jointName>
+          <useForce>1</useForce>
+          <multiplier>1.39626</multiplier>
+          <offset>0</offset>
+          <servo_min>1000</servo_min>
+          <servo_max>2000</servo_max>
+          <type>COMMAND</type>
+          <cmd_topic>/main_sail_joint/cmd_pos</cmd_topic>
+        </control>
+
+      </plugin>
     </model>
 
   </world>

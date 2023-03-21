@@ -33,6 +33,7 @@
     </include>
 
     <joint type="revolute" name="main_sail_joint">
+      <pose relative_to="main_sail::main_sail_link">0 0 0 0 0 0</pose>
       <child>main_sail::main_sail_link</child>
       <parent>land_yacht_base::base_link</parent>
       <axis>
