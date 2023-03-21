@@ -5,27 +5,17 @@
     gz sim -v4 -r land_yacht_beach.sdf
 
     2. Set steering
-    gz topic -t "/steer" -m gz.msgs.Double -p "data: 1.0"
+    gz topic -t "/steering_joint/cmd_pos" -m gz.msgs.Double -p "data: 1.0"
 
-    3. Set wing sail with elevator angle
-    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.5"
+    3. Set wing sail elevator angle
+    gz topic -t "/wing_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: -0.5"
  -->
 
 <sdf version="1.6">
-  <world name="land_yacht_beach">
+  <world name="beach">
     <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
-      <!-- <dart> -->
-        <!-- <collision_detector>bullet</collision_detector> -->
-        <!-- <collision_detector>dart</collision_detector> -->
-        <!-- <collision_detector>fcl</collision_detector> -->
-        <!-- <collision_detector>ode</collision_detector> -->
-        <!-- <solver> -->
-          <!-- <solver_type>dantzig</solver_type> -->
-          <!-- <solver_type>pgs</solver_type> -->
-        <!-- </solver> -->
-      <!-- </dart> -->
     </physics>
 
     <plugin filename="gz-sim-physics-system"
@@ -179,11 +169,11 @@
     </model>
 
     <model name="land_yacht_with_ardupilot">
-      <pose>0 0 0 0 0 1.57079632</pose>
+      <pose>0 0 0.08 0 0 1.57079632</pose>
 
       <include>
-        <pose>0 0 0.08 0 0 0</pose>
-        <uri>model://land_yacht_wing_sail</uri>
+        <pose>0 0 0 0 0 0</pose>
+        <uri>model://land_yacht</uri>
         <name>land_yacht</name>
       </include>
 
@@ -204,31 +194,17 @@
         <cmd_min>-10</cmd_min>
       </plugin>
 
-      <!-- <plugin filename="gz-sim-joint-position-controller-system"
-          name="gz::sim::systems::JointPositionController">
-        <joint_name>land_yacht::wing_sail::wing_sail_elevator_joint</joint_name>
-        <topic>/trim</topic>
-        <p_gain>2</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>0</d_gain>
-        <i_max>1</i_max>
-        <i_min>-1</i_min>
-        <cmd_max>10</cmd_max>
-        <cmd_min>-10</cmd_min>
-      </plugin> -->
-
-      <!-- sail mast rotation (direct drive) -->
-      <plugin filename="gz-sim-joint-position-controller-system"
-          name="gz::sim::systems::JointPositionController">
-        <joint_name>land_yacht::wing_sail_joint</joint_name>
-        <topic>/wing_sail_joint/cmd_pos</topic>
-        <p_gain>2</p_gain>
+      <plugin filename="asv_sim2-sail-position-controller-system"
+          name="gz::sim::systems::SailPositionController">
+        <joint_name>land_yacht::main_sail_joint</joint_name>
+        <topic>/main_sail_joint/cmd_pos</topic>
+        <p_gain>50</p_gain>
         <i_gain>0.0</i_gain>
         <d_gain>0.1</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>10</cmd_max>
-        <cmd_min>-10</cmd_min>
+        <cmd_max>200</cmd_max>
+        <cmd_min>-200</cmd_min>
       </plugin>
 
       <plugin name="ArduPilotPlugin"
@@ -296,71 +272,15 @@
           input command in [0, 1]
           desired sail angle in [5, 50] deg
         -->
-        <!-- <control channel="3">
-          <jointName>main_sail_joint</jointName>
+        <control channel="3">
+          <jointName>land_yacht::main_sail_joint</jointName>
           <useForce>1</useForce>
           <multiplier>1.39626</multiplier>
           <offset>0</offset>
-          <type>POSITION_LIMIT</type>
-          <p_gain>40</p_gain>
-          <i_gain>0.1</i_gain>
-          <d_gain>0</d_gain>
-          <i_max>1</i_max>
-          <i_min>-1</i_min>
-          <cmd_max>1000</cmd_max>
-          <cmd_min>-1000</cmd_min>
-        </control> -->
-
-        <!--
-          SERVO4_FUNCTION 128 (WingSailElevator)
-          SERVO4_MIN 1000
-          SERVO4_MAX 2000
-          SERVO4_TRIM 1000
-
-          SAIL_ANGLE_MIN 0
-          SAIL_ANGLE_MAX 10
-
-          DEFLECTION_MAX_DEG 10
-
-          input command in [0, 1]
-          offset = -0.5
-          multiplier radians(2 * DEFLECTION_MAX_DEG) = 0.34906585
-          desired wingsail elevator in [-10, 10] deg
-        -->
-        <!-- <control channel="3">
-          <jointName>land_yacht::wing_sail::wing_sail_elevator_joint</jointName>
-          <useForce>1</useForce>
-          <multiplier>0.34906585</multiplier>
-          <offset>-0.5</offset>
           <servo_min>1000</servo_min>
           <servo_max>2000</servo_max>
           <type>COMMAND</type>
-          <cmd_topic>/trim</cmd_topic>
-        </control> -->
-
-        <!--
-          SERVO4_FUNCTION 137 (SailMastRotation)
-          SERVO4_MIN 1000
-          SERVO4_MAX 2000
-          SERVO4_TRIM 1500
-
-          SAIL_ANGLE_MIN 0
-          SAIL_ANGLE_MAX 90
-
-          input command in [0, 1]
-          offset = -0.5
-          multiplier radians(2 * SAIL_ANGLE_MAX) = pi
-          desired wingsail position in [-90, 90] deg
-        -->
-        <control channel="3">
-          <jointName>land_yacht::wing_sail_joint</jointName>
-          <useForce>1</useForce>
-          <multiplier>3.141592653</multiplier>
-          <offset>-0.5</offset>
-          <servo_min>1000</servo_min>
-          <servo_max>2000</servo_max>
-          <type>COMMAND</type>
-          <cmd_topic>/wing_sail_joint/cmd_pos</cmd_topic>
+          <cmd_topic>/main_sail_joint/cmd_pos</cmd_topic>
         </control>
 
       </plugin>
