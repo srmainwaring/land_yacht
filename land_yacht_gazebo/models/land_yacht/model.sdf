@@ -42,8 +42,8 @@
           <damping>0.01</damping>
         </dynamics>
         <limit>
-          <lower>-1.396263402</lower>
-          <upper>1.396263402</upper>
+          <lower>-1.570796326</lower>
+          <upper>1.570796326</upper>
         </limit>
       </axis>
       <sensor name="force_torque_sensor" type="force_torque">
