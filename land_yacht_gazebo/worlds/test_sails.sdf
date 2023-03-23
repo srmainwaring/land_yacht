@@ -2,16 +2,17 @@
 <!-- 
   Usage
     1. Run simulation
-    gz sim -v4 -r sails_test.sdf
+    gz sim -v4 -r test_sails.sdf
 
     2. Set wing sail angle
-    gz topic -t "/angle" -m gz.msgs.Double -p "data: -0.6"
+    gz topic -t "/wing_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: -0.6"
 
     3. Set wing sail with elevator angle
-    gz topic -t "/trim" -m gz.msgs.Double -p "data: -0.4"
+    gz topic -t "/wing_sail_elevator_joint/cmd_pos"
+    -m gz.msgs.Double -p "data: -0.4"
 
     4. Set main sail sheet
-    gz topic -t "/sheet" -m gz.msgs.Double -p "data: 0.5"
+    gz topic -t "main_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: 0.5"
  -->
 <sdf version="1.6">
   <world name="test">
@@ -158,7 +159,7 @@
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
         <joint_name>wing_sail_joint</joint_name>
-        <topic>/angle</topic>
+        <topic>/wing_sail_joint/cmd_pos</topic>
         <p_gain>2</p_gain>
         <i_gain>0.1</i_gain>
         <d_gain>0.05</d_gain>
@@ -238,7 +239,7 @@
       <plugin filename="gz-sim-joint-position-controller-system"
           name="gz::sim::systems::JointPositionController">
         <joint_name>wing_sail::wing_sail_elevator_joint</joint_name>
-        <topic>/trim</topic>
+        <topic>/wing_sail_elevator_joint/cmd_pos</topic>
         <p_gain>1</p_gain>
         <i_gain>0</i_gain>
         <d_gain>0</d_gain>
@@ -318,14 +319,14 @@
       <plugin filename="asv_sim2-sail-position-controller-system"
           name="gz::sim::systems::SailPositionController">
         <joint_name>main_sail_joint</joint_name>
-        <topic>/sheet</topic>
-        <p_gain>20</p_gain>
-        <i_gain>0.2</i_gain>
-        <d_gain>0</d_gain>
+        <topic>/main_sail_joint/cmd_pos</topic>
+        <p_gain>100</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>30</d_gain>
         <i_max>1</i_max>
         <i_min>-1</i_min>
-        <cmd_max>1000</cmd_max>
-        <cmd_min>-1000</cmd_min>
+        <cmd_max>100</cmd_max>
+        <cmd_min>-100</cmd_min>
       </plugin>
 
       <link name="base_link">
