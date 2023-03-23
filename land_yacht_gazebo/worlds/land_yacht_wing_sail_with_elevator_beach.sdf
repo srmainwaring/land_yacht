@@ -64,9 +64,7 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
-    <!-- Gazebo world frame is aligned ENU -->
-
-    <!-- Wind from the North - along negative y-axis -->
+    <!-- Wind: 7 m/s from the north (ENU) -->
     <wind>
       <linear_velocity>0 -7 0</linear_velocity>
     </wind>
