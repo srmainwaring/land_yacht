@@ -62,7 +62,8 @@
 
     <!-- Wind: 7 m/s from the north (ENU) -->
     <wind>
-      <linear_velocity>0 -7 0.0</linear_velocity>
+      <!-- <linear_velocity>0 -10 0</linear_velocity> -->
+      <linear_velocity>-10 0 0</linear_velocity>
     </wind>
 
     <model name="ground_plane">
@@ -93,7 +94,8 @@
     </model>
 
     <model name="main_sail_test">
-      <pose>0 0 0.05 0 0 1.57079632</pose>
+      <!-- <pose>0 0 0.05 0 0 1.57079632</pose> -->
+      <pose>0 0 0.05 0 0 0</pose>
 
       <plugin filename="gz-sim-joint-state-publisher-system"
         name="gz::sim::systems::JointStatePublisher">
@@ -113,8 +115,10 @@
         <cmd_min>-1000</cmd_min>
       </plugin>
 
-      <plugin filename="asv_sim2-sail-position-controller-system"
-          name="gz::sim::systems::SailPositionController">
+      <!-- <plugin filename="asv_sim2-sail-position-controller-system"
+          name="gz::sim::systems::SailPositionController"> -->
+      <plugin filename="gz-sim-joint-position-controller-system"
+          name="gz::sim::systems::JointPositionController">
         <joint_name>main_sail_joint</joint_name>
         <topic>/main_sail_joint/cmd_pos</topic>
         <initial_position>0.0</initial_position>
@@ -241,6 +245,7 @@
 
       <include>
         <pose>0 0 0.1 0 -0.20943951 0</pose>
+        <!-- <pose>0 0 0.1 0 0 0</pose> -->
         <uri>model://main_sail_ly01</uri>
         <name>main_sail</name>
       </include>

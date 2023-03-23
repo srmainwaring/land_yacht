@@ -19,8 +19,10 @@
   <model name="main_sail_ly01">
 
     <!-- Plugins -->
-    <plugin name="gz::sim::systems::SailLiftDrag"
-        filename="asv_sim2-sail-lift-drag-system">
+    <!-- <plugin name="gz::sim::systems::SailLiftDrag"
+        filename="asv_sim2-sail-lift-drag-system"> -->
+    <plugin name="gz::sim::systems::LiftDrag"
+        filename="gz-sim-lift-drag-system">
       <a0>0.0</a0>
       <cla>6.2832</cla>
       <alpha_stall>0.1592</alpha_stall>
@@ -32,7 +34,8 @@
       <upward>0 1 0</upward>
       <cp>-0.15 0.0 0.75</cp>
       <link_name>main_sail_link</link_name>
-      <radial_symmetry>true</radial_symmetry>
+      <!-- <radial_symmetry>true</radial_symmetry> -->
+      <radial_symmetry>false</radial_symmetry>
       <topic>lift_drag</topic>
     </plugin>
 
