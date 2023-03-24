@@ -21,8 +21,6 @@
     <!-- Plugins -->
     <plugin name="gz::sim::systems::SailLiftDrag"
         filename="asv_sim2-sail-lift-drag-system">
-    <!-- <plugin name="gz::sim::systems::LiftDrag"
-        filename="gz-sim-lift-drag-system"> -->
       <a0>0.0</a0>
       <cla>6.2832</cla>
       <alpha_stall>0.1592</alpha_stall>
@@ -41,8 +39,8 @@
     <!-- Main sail-->
     <link name="main_sail_link">
       <!--
-        The mast should be raked in the joint used to attach the rig.
-        <pose>0.5 0 0.04 0 -0.20943951 0</pose>
+      The mast should be raked in the joint used to attach the rig.
+      <pose>0.5 0 0.04 0 -0.20943951 0</pose>
       -->
       <inertial>
         <pose>-0.15 0.0 0.75 0 0 0</pose>
@@ -58,9 +56,12 @@
       <collision name="sail_collision">
         <pose>-0.2 0 0.9 0 0 0</pose>
         <geometry>
-          <!-- <mesh>
+          <!--
+          Simplify collision by using a box shape rather than the mesh.
+          <mesh>
             <uri>model://main_sail_ly01/meshes/land_yacht_rig.stl</uri>
-          </mesh> -->
+          </mesh>
+          -->
           <box>
             <size>0.4 0.01 1.4</size>
           </box>
