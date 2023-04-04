@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-  Copyright (C) 2019  Rhys Mainwaring
+  Copyright (C) 2019-2023  Rhys Mainwaring
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -183,7 +183,7 @@
       <axis>
         <xyz>0 0 1</xyz>
         <dynamics>
-          <damping>0.001</damping>
+          <damping>0.01</damping>
         </dynamics>
         <limit>
           <lower>-1.570796327</lower>
