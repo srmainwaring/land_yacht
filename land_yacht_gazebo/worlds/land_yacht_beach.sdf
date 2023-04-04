@@ -7,8 +7,8 @@
     2. Set steering
     gz topic -t "/steering_joint/cmd_pos" -m gz.msgs.Double -p "data: 1.0"
 
-    3. Set wing sail elevator angle
-    gz topic -t "/wing_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: -0.5"
+    3. Set main sail angle
+    gz topic -t "/main_sail_joint/cmd_pos" -m gz.msgs.Double -p "data: -0.5"
  -->
 
 <sdf version="1.6">
