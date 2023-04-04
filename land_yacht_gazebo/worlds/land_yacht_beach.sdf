@@ -49,10 +49,12 @@
     </scene>
 
     <spherical_coordinates>
-      <latitude_deg>51.56991349023042</latitude_deg>
-      <longitude_deg>-4.033693921107272</longitude_deg>
+      <latitude_deg>51.56965364806888</latitude_deg>
+      <longitude_deg>-4.031611898852067</longitude_deg>
+      <!-- <latitude_deg>51.569605</latitude_deg>
+      <longitude_deg>-4.031606</longitude_deg> -->
       <elevation>10.0</elevation>
-      <heading_deg>0</heading_deg>
+      <heading_deg>-135</heading_deg>
       <surface_model>EARTH_WGS84</surface_model>
     </spherical_coordinates>
 
@@ -64,9 +66,9 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
-    <!-- Wind: 10 m/s from the north (ENU) -->
+    <!-- Wind: 10 m/s from the SW (ENU) -->
     <wind>
-      <linear_velocity>0 -10 0</linear_velocity>
+      <linear_velocity>7 7 0</linear_velocity>
     </wind>
 
     <model name="axes">
@@ -125,10 +127,10 @@
       <link name="link">
         <collision name="collision">
           <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>500 500</size>
-            </plane>
+            <mesh>
+              <uri>./caswell_v2.dae</uri>
+              <scale>1.5 1.5 1</scale>
+            </mesh>
           </geometry>
           <surface>
             <contact>
@@ -145,29 +147,17 @@
         <visual name="visual">
           <cast_shadows>false</cast_shadows>
           <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>500 500</size>
-            </plane>
+            <mesh>
+              <uri>./caswell_v2.dae</uri>
+              <scale>1.5 1.5 1</scale>
+            </mesh>
           </geometry>
-          <material>
-            <ambient>1 1 1</ambient>
-            <diffuse>1 1 1</diffuse>
-            <specular>0.01 0.01 0.01</specular>
-            <pbr>
-              <metal>
-                <albedo_map>model://land_yacht_base/materials/textures/beach_sand.jpg</albedo_map>
-                <metalness>0</metalness>
-                <roughness>1</roughness>
-              </metal>
-            </pbr>
-          </material>
         </visual>
       </link>
     </model>
 
     <model name="land_yacht_with_ardupilot">
-      <pose>0 0 0.08 0 0 1.57079632</pose>
+      <pose>0 0 0.14 0 0 -2.356194</pose>
 
       <include>
         <pose>0 0 0 0 0 0</pose>

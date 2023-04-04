@@ -18,7 +18,7 @@ $HOME/land_yacht/land_yacht_gazebo/worlds
 
 ### `land_yacht`
 
-A wing sail land yacht model.
+A land yacht model with standard sails.
 
 #### Run Gazebo
 
@@ -29,6 +29,9 @@ gz sim -v4 -r land_yacht_beach.sdf
 #### Run ArduPilot SITL
 
 ```bash
-sim_vehicle.py -v Rover -f JSON --add-param-file=$HOME/land_yacht/land_yacht_gazebo/config/land_yacht_wingsail.param --console --map
+sim_vehicle.py -v Rover -f json \
+--add-param-file=$HOME/land_yacht/land_yacht_gazebo/config/land_yacht.param \
+--console --map \
+--custom-location="51.56965364806888,-4.031611898852067,10,-135"
 ```
 

@@ -70,14 +70,15 @@
       <visual name="rig_visual">
         <geometry>
           <mesh>
-            <uri>model://main_sail_ly01/meshes/land_yacht_rig.stl</uri>
+            <!-- <uri>model://main_sail_ly01/meshes/land_yacht_rig.stl</uri> -->
+            <uri>model://main_sail_ly01/meshes/land_yacht_rig.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
       <visual name="sail_visual">
         <pose>-0.01 0 0.12 0 0.20943951 0</pose>

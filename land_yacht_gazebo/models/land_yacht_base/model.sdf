@@ -24,17 +24,18 @@
       <visual name="base">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_base/meshes/land_yacht_base.stl</uri>
+            <!-- <uri>model://land_yacht_base/meshes/land_yacht_base.stl</uri> -->
+            <uri>model://land_yacht_base/meshes/land_yacht_base.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
 
-      <visual name="steering_visual">
+      <!-- <visual name="steering_visual">
         <pose>0.89 0 0 0 0 0</pose>
         <geometry>
           <mesh>
@@ -46,9 +47,9 @@
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
-      </visual>
+      </visual> -->
 
-      <visual name="motor_visual">
+      <!-- <visual name="motor_visual">
         <pose>0.57 0 0.22 0 0 0</pose>
         <geometry>
           <mesh>
@@ -60,7 +61,7 @@
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
         </material>
-      </visual>
+      </visual> -->
 
       <!-- Main beam -->
       <collision name="main_beam_collision">
@@ -104,7 +105,7 @@
       </sensor>
 
       <visual name="anemometer_visual">
-        <pose>0.67 0 0.72 0 0 0</pose>
+        <pose>0.67 0 0.5165 0 0 0</pose>
         <geometry>
           <cylinder>
             <radius>0.034</radius>
@@ -119,7 +120,7 @@
       </visual>
 
       <sensor name="anemometer" type="custom" gz:type="anemometer">
-        <pose>0.67 0 0.72 0 0 0</pose>
+        <pose>0.67 0 0.5165 0 0 0</pose>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
         <gz:anemometer>
@@ -156,14 +157,15 @@
       <visual name="right_wheel_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri>
+            <!-- <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri> -->
+            <uri>model://land_yacht_base/meshes/sand_wheel.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
       <collision name="right_wheel_collision">
         <geometry>
@@ -207,14 +209,15 @@
       <visual name="left_wheel_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri>
+            <!-- <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri> -->
+            <uri>model://land_yacht_base/meshes/sand_wheel.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
       <collision name="left_wheel_collision">
         <geometry>
@@ -260,14 +263,15 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://land_yacht_base/meshes/land_yacht_forks_v4.stl</uri>
+            <!-- <uri>model://land_yacht_base/meshes/land_yacht_forks_v4.stl</uri> -->
+            <uri>model://land_yacht_base/meshes/land_yacht_forks_v4.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
       <collision name="steering_collision">
         <pose>-0.05 0 0.01 0 0 0</pose>
@@ -313,14 +317,15 @@
       <visual name="front_wheel_visual">
         <geometry>
           <mesh>
-            <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri>
+            <!-- <uri>model://land_yacht_base/meshes/sand_wheel.stl</uri> -->
+            <uri>model://land_yacht_base/meshes/sand_wheel.dae</uri>
           </mesh>
         </geometry>
-        <material>
+        <!-- <material>
           <ambient>0.5 0.5 0.5 1.0</ambient>
           <diffuse>0.5 0.5 0.5 1.0</diffuse>
           <specular>0.1 0.1 0.1 1.0</specular>
-        </material>
+        </material> -->
       </visual>
       <collision name="front_wheel_collision">
         <geometry>
