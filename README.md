@@ -2,7 +2,8 @@
 
 A land yacht model for Gazebo and ArduPilot.
 
-![land-yacht-gazebo](https://user-images.githubusercontent.com/24916364/223479135-2d6bbdd7-9642-4705-a3c2-4ca511b91d44.png)
+![land_yacht_2](https://user-images.githubusercontent.com/24916364/229939335-6cab605e-ed94-4908-86e6-8886863c62e5.jpg)
+
 
 ## Usage
 
